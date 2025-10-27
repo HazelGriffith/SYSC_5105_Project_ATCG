@@ -1,4 +1,5 @@
 import signal
+import os
 
 class Set:
 
@@ -75,16 +76,16 @@ class SetCoverProblem:
                     mainSet.originalOrder[j] = tempInt
         
         for i in range(mainSet.nSubSets):
-            mainSet.subSetsSizesSum.append([])
+            mainSet.subSetSizesSum.append([])
             for j in range(mainSet.nSubSets):
-                mainSet.subSetsSizesSum[i][j].append(0)
+                mainSet.subSetSizesSum[i].append(0)
 
 
         for i in range(mainSet.nSubSets):
             tempInt = 0
-            for j in range(mainSet.nSubSets):
+            for j in range(i, mainSet.nSubSets):
                 tempInt += mainSet.nSubSetSizes[j]
-                mainSet.subSetsSizesSum[i][j-1] = tempInt
+                mainSet.subSetSizesSum[i][j-i] = tempInt
 
     def copySolutionToBest(self):
         self.bestSolution.nSolutionSize = self.aSolution.nSolutionSize
@@ -162,7 +163,7 @@ class SetCoverProblem:
 
     def addSubSet(self, solution:Solution, subSetIndex:int):
         solution.nSolutionSize += 1
-        solution.subSets[solution.nSolutionSize-1] = subSetIndex
+        solution.subSets.append(subSetIndex)
 
         for i in range(mainSet.nSubSetSizes[subSetIndex]):
             solution.boolIncluded[mainSet.subsets[subSetIndex][i]-1] += 1
@@ -213,6 +214,17 @@ def inthandler(signum, frame, setCover:SetCoverProblem):
         exit(0)
 
 if __name__ == "__main__":
+
+    cwd = os.getcwd()
+
+    if cwd.endswith("ATCG"):
+        os.chdir("CaseStudies/Set_Problem_Solver")
+    elif cwd.endswith("Studies"):
+        os.chdir("Set_Problem_Solver")
+    
+    cwd = os.getcwd()
+    print(cwd)
+
     filename = input("Enter your filename: ")
 
     timerUsed = input("Enter y for a 60s timer: ")
@@ -224,26 +236,32 @@ if __name__ == "__main__":
     mainSet = Set()
     try:
         lineno = 0
-        with open(filename+".txt", 'r') as gameFile:
+        with open("tests/"+filename+".txt", 'r') as gameFile:
             line = gameFile.readline()
-            if lineno == 0:
-                mainSet.nGlobalSetSize = int(line)
-            elif lineno == 1:
-                mainSet.nSubSets = int(line)
-                for i in range(mainSet.nSubSets):
-                    mainSet.originalOrder[i] = i + 1
-            else:
-                nums = line.split(" ")
-                subsetSize = len(nums)
-                mainSet.nSubSetSizes[lineno-2] = subsetSize
-                mainSet.subsets[lineno-2] = nums
+            while line != "":
+                if lineno == 0:
+                    mainSet.nGlobalSetSize = int(line)
+                elif lineno == 1:
+                    mainSet.nSubSets = int(line)
+                    for i in range(mainSet.nSubSets):
+                        mainSet.originalOrder.append(i + 1)
+                else:
+                    nums = line.split(" ")
+                    int_nums = []
+                    for num in nums: 
+                        int_nums.append(int(num.replace("\n","")))
+                    subsetSize = len(nums)
+                    mainSet.nSubSetSizes.append(subsetSize)
+                    mainSet.subsets.append(int_nums)
 
-            lineno += 1
+                lineno += 1
+                line = gameFile.readline()
 
 
     except Exception as e:
         print(e)
         print("Invalid Filename")
+        exit(0)
 
     setCover = SetCoverProblem(mainSet, Solution(), Solution(mainSet.nSubSets-1), 0)
     setCover.sortSubSets()
