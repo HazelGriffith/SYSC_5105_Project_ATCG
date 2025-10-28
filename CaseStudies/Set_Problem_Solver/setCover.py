@@ -14,14 +14,14 @@ class Set:
 
 class Solution:
 
-    def __init__(self, nSolutionSize:int=0, subSets: list[int] = [], boolIncluded:list[int] = []):
+    def __init__(self, nSolutionSize:int=0):
         self.nSolutionSize = nSolutionSize
             
-        self.subSets = subSets
+        self.subSets = []
         for i in range(mainSet.nSubSets):
             self.subSets.append(-1)
 
-        self.boolIncluded = boolIncluded
+        self.boolIncluded = []
         for i in range(mainSet.nGlobalSetSize):
             self.boolIncluded.append(0)
 
@@ -56,7 +56,7 @@ class SetCoverProblem:
     def numberOfUncoveredElements(self, subSetIndex:int):
         count = 0
         for i in range(mainSet.nSubSetSizes[subSetIndex]):
-            if (self.bestSolution.boolIncluded[mainSet.subsets[subSetIndex][i] - 1]):
+            if (self.bestSolution.boolIncluded[mainSet.subsets[subSetIndex][i] - 1] == 0):
                 count += 1
         
         return count
@@ -87,10 +87,12 @@ class SetCoverProblem:
                 tempInt += mainSet.nSubSetSizes[j]
                 mainSet.subSetSizesSum[i][j-i] = tempInt
 
-    def copySolutionToBest(self):
-        self.bestSolution.nSolutionSize = self.aSolution.nSolutionSize
-        for i in range(self.aSolution.nSolutionSize):
-            self.bestSolution.subSets[i] = self.aSolution.subSets[i]
+    def copySolutionToBest(self, solution:Solution):
+        self.bestSolution.nSolutionSize = solution.nSolutionSize
+        for i in range(solution.nSolutionSize):
+            self.bestSolution.subSets[i] = solution.subSets[i]
+        for i in range(self.mainSet.nGlobalSetSize):
+            self.bestSolution.boolIncluded[i] = solution.boolIncluded[i]
 
     def backTrack(self, solution:Solution):
         if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
@@ -98,7 +100,7 @@ class SetCoverProblem:
         
         if self.checkSolution(solution):
             if solution.nSolutionSize < self.bestSolution.nSolutionSize:
-                self.copySolutionToBest()
+                self.copySolutionToBest(solution)
 
         for i in range(mainSet.nSubSets):
             if (self.containsSubSet(solution, i) == False):
@@ -115,7 +117,7 @@ class SetCoverProblem:
         
         if (self.checkSolution(solution)):
             if solution.nSolutionSize < self.bestSolution.nSolutionSize:
-                self.copySolutionToBest()
+                self.copySolutionToBest(solution)
 
         for i in range(self.depth, mainSet.nSubSets):
             self.addSubSet(solution, i)
@@ -130,7 +132,7 @@ class SetCoverProblem:
         
         if (self.checkSolution(solution)):
             if solution.nSolutionSize < self.bestSolution.nSolutionSize:
-                self.copySolutionToBest()
+                self.copySolutionToBest(solution)
             return
         
         for i in range(last, mainSet.nSubSets):
@@ -144,13 +146,13 @@ class SetCoverProblem:
         
         if (self.checkSolution(solution)):
             if solution.nSolutionSize < self.bestSolution.nSolutionSize:
-                self.copySolutionToBest()
+                self.copySolutionToBest(solution)
                 print(f"New Solution Size: {self.bestSolution.nSolutionSize}\n")
 
             return
         
         for i in range(last, mainSet.nSubSets):
-            if (sum+mainSet.subSetsSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < mainSet.nGlobalSetSize):
+            if (sum + mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < mainSet.nGlobalSetSize):
                 return
             
             self.addSubSet(solution, i)
@@ -163,7 +165,7 @@ class SetCoverProblem:
 
     def addSubSet(self, solution:Solution, subSetIndex:int):
         solution.nSolutionSize += 1
-        solution.subSets.append(subSetIndex)
+        solution.subSets[solution.nSolutionSize-1] = subSetIndex
 
         for i in range(mainSet.nSubSetSizes[subSetIndex]):
             solution.boolIncluded[mainSet.subsets[subSetIndex][i]-1] += 1
@@ -263,7 +265,9 @@ if __name__ == "__main__":
         print("Invalid Filename")
         exit(0)
 
-    setCover = SetCoverProblem(mainSet, Solution(), Solution(mainSet.nSubSets-1), 0)
+    aSolution = Solution()
+    bestSolution = Solution(mainSet.nSubSets-1)
+    setCover = SetCoverProblem(mainSet, aSolution, bestSolution, 0)
     setCover.sortSubSets()
 
     setCover.greedy()
