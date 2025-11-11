@@ -40,11 +40,12 @@ class Quadratic:
             output = "x1 = "
             output += real + " + " if (not real == "0") else ""
             output += imaginary if (not imaginary == "1") else ""
-            output += "i\nx2 = "
+            output += "j\nx2 = "
             output += real + " - " if (not real == "0") else "-"
             output += imaginary if (not imaginary == "1") else ""
-            output += "i"
+            output += "j"
             print(output)
+            return output
         else: # real roots
             sqrt = Quadratic.sqrtByNewton(discriminant)
 			# mixed approach to avoid subtractive cancellation
@@ -55,6 +56,7 @@ class Quadratic:
             output = "x1 = " + x1
             output += "\nx2 = " + x2 if (not x1 == x2) else ""
             print(output)
+            return output
 	
     '''/*
 	* Extracts the sign of a double value.
