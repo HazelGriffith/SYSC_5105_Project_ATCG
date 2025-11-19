@@ -14,15 +14,15 @@ class Set:
 
 class Solution:
 
-    def __init__(self, nSolutionSize:int=0):
+    def __init__(self, probSet:Set, nSolutionSize:int=0):
         self.nSolutionSize = nSolutionSize
             
         self.subSets = []
-        for i in range(mainSet.nSubSets):
+        for i in range(probSet.nSubSets):
             self.subSets.append(-1)
 
         self.boolIncluded = []
-        for i in range(mainSet.nGlobalSetSize):
+        for i in range(probSet.nGlobalSetSize):
             self.boolIncluded.append(0)
 
 
@@ -45,7 +45,7 @@ class SetCoverProblem:
         while self.checkSolution(self.bestSolution) == False:
             addIndex = 0
             addNumber = 0
-            for i in range(mainSet.nSubSets):
+            for i in range(self.mainSet.nSubSets):
                 if self.containsSubSet(self.bestSolution, i) == False:
                     temp = self.numberOfUncoveredElements(i)
                     if temp > addNumber:
@@ -55,37 +55,37 @@ class SetCoverProblem:
 
     def numberOfUncoveredElements(self, subSetIndex:int):
         count = 0
-        for i in range(mainSet.nSubSetSizes[subSetIndex]):
-            if (self.bestSolution.boolIncluded[mainSet.subsets[subSetIndex][i] - 1] == 0):
+        for i in range(self.mainSet.nSubSetSizes[subSetIndex]):
+            if (self.bestSolution.boolIncluded[self.mainSet.subsets[subSetIndex][i] - 1] == 0):
                 count += 1
         
         return count
 
     def sortSubSets(self):
-        for i in range(mainSet.nSubSets):
-            for j in range(mainSet.nSubSets):
-                if mainSet.nSubSetSizes[i] < mainSet.nSubSetSizes[j]:
-                    tempInt = mainSet.nSubSetSizes[i]
-                    tempIntP = mainSet.subsets[i]
-                    mainSet.subsets[i] = mainSet.subsets[j]
-                    mainSet.subsets[j] = tempIntP
-                    mainSet.nSubSetSizes[i] = mainSet.nSubSetSizes[j]
-                    mainSet.nSubSetSizes[j] = tempInt
-                    tempInt = mainSet.originalOrder[i]
-                    mainSet.originalOrder[i] = mainSet.originalOrder[j]
-                    mainSet.originalOrder[j] = tempInt
+        for i in range(self.mainSet.nSubSets):
+            for j in range(self.mainSet.nSubSets):
+                if self.mainSet.nSubSetSizes[i] < self.mainSet.nSubSetSizes[j]:
+                    tempInt = self.mainSet.nSubSetSizes[i]
+                    tempIntP = self.mainSet.subsets[i]
+                    self.mainSet.subsets[i] = self.mainSet.subsets[j]
+                    self.mainSet.subsets[j] = tempIntP
+                    self.mainSet.nSubSetSizes[i] = self.mainSet.nSubSetSizes[j]
+                    self.mainSet.nSubSetSizes[j] = tempInt
+                    tempInt = self.mainSet.originalOrder[i]
+                    self.mainSet.originalOrder[i] = self.mainSet.originalOrder[j]
+                    self.mainSet.originalOrder[j] = tempInt
         
-        for i in range(mainSet.nSubSets):
-            mainSet.subSetSizesSum.append([])
-            for j in range(mainSet.nSubSets):
-                mainSet.subSetSizesSum[i].append(0)
+        for i in range(self.mainSet.nSubSets):
+            self.mainSet.subSetSizesSum.append([])
+            for j in range(self.mainSet.nSubSets):
+                self.mainSet.subSetSizesSum[i].append(0)
 
 
-        for i in range(mainSet.nSubSets):
+        for i in range(self.mainSet.nSubSets):
             tempInt = 0
-            for j in range(i, mainSet.nSubSets):
-                tempInt += mainSet.nSubSetSizes[j]
-                mainSet.subSetSizesSum[i][j-i] = tempInt
+            for j in range(i, self.mainSet.nSubSets):
+                tempInt += self.mainSet.nSubSetSizes[j]
+                self.mainSet.subSetSizesSum[i][j-i] = tempInt
 
     def copySolutionToBest(self, solution:Solution):
         self.bestSolution.nSolutionSize = solution.nSolutionSize
@@ -102,7 +102,7 @@ class SetCoverProblem:
             if solution.nSolutionSize < self.bestSolution.nSolutionSize:
                 self.copySolutionToBest(solution)
 
-        for i in range(mainSet.nSubSets):
+        for i in range(self.mainSet.nSubSets):
             if (self.containsSubSet(solution, i) == False):
                 self.addSubSet(solution, i)
                 self.depth += 1
@@ -119,7 +119,7 @@ class SetCoverProblem:
             if solution.nSolutionSize < self.bestSolution.nSolutionSize:
                 self.copySolutionToBest(solution)
 
-        for i in range(self.depth, mainSet.nSubSets):
+        for i in range(self.depth, self.mainSet.nSubSets):
             self.addSubSet(solution, i)
             self.depth += 1
             self.backTrack2(solution)
@@ -135,7 +135,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
             return
         
-        for i in range(last, mainSet.nSubSets):
+        for i in range(last, self.mainSet.nSubSets):
             self.addSubSet(solution, i)
             self.backTrack3(solution, i + 1)
             self.removeSubSet(solution, i)
@@ -151,15 +151,15 @@ class SetCoverProblem:
 
             return
         
-        for i in range(last, mainSet.nSubSets):
-            if (sum + mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < mainSet.nGlobalSetSize):
+        for i in range(last, self.mainSet.nSubSets):
+            if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
             
             self.addSubSet(solution, i)
-            sum += mainSet.nSubSetSizes[i]
+            sum += self.mainSet.nSubSetSizes[i]
 
             self.backTrack4(solution, i+1, sum)
-            sum -= mainSet.nSubSetSizes[i]
+            sum -= self.mainSet.nSubSetSizes[i]
 
             self.removeSubSet(solution, i)
 
@@ -167,16 +167,16 @@ class SetCoverProblem:
         solution.nSolutionSize += 1
         solution.subSets[solution.nSolutionSize-1] = subSetIndex
 
-        for i in range(mainSet.nSubSetSizes[subSetIndex]):
-            solution.boolIncluded[mainSet.subsets[subSetIndex][i]-1] += 1
+        for i in range(self.mainSet.nSubSetSizes[subSetIndex]):
+            solution.boolIncluded[self.mainSet.subsets[subSetIndex][i]-1] += 1
 
 
     def removeSubSet(self, solution:Solution, subSetIndex:int):
         solution.subSets[solution.nSolutionSize-1] = -1
         solution.nSolutionSize -= 1
 
-        for i in range(mainSet.nSubSetSizes[subSetIndex]):
-            solution.boolIncluded[mainSet.subsets[subSetIndex][i] - 1] -= 1
+        for i in range(self.mainSet.nSubSetSizes[subSetIndex]):
+            solution.boolIncluded[self.mainSet.subsets[subSetIndex][i] - 1] -= 1
 
     def containsSubSet(self, solution:Solution, subSetIndex:int) -> bool:
         for i in range(solution.nSolutionSize):
@@ -187,7 +187,7 @@ class SetCoverProblem:
 
     def checkSolution(self, solution:Solution) -> bool:
         allDone = True
-        for i in range(mainSet.nGlobalSetSize):
+        for i in range(self.mainSet.nGlobalSetSize):
             boolInc = solution.boolIncluded[i]
             if boolInc == 0:
                 return False
@@ -197,18 +197,18 @@ class SetCoverProblem:
     def printSolution(self, solution:Solution):
         print(solution.nSolutionSize)
         for i in range(solution.nSolutionSize):
-            print(mainSet.originalOrder[solution.subSets[i]])
+            print(self.mainSet.originalOrder[solution.subSets[i]])
             self.printSubSet(solution.subSets[i])
 
     def echoInit(self):
-        print(f"Universal Set 1-{mainSet.nGlobalSetSize}\n")
-        print(f"Number of subsets {mainSet.nSubSets}\n")
-        for i in range(mainSet.nSubSets):
+        print(f"Universal Set 1-{self.mainSet.nGlobalSetSize}\n")
+        print(f"Number of subsets {self.mainSet.nSubSets}\n")
+        for i in range(self.mainSet.nSubSets):
             self.printSubSet(i)
 
     def printSubSet(self, nSubSetIndex:int):
-        for i in range(mainSet.nSubSetSizes[nSubSetIndex]):
-            print(mainSet.subsets[nSubSetIndex][i])
+        for i in range(self.mainSet.nSubSetSizes[nSubSetIndex]):
+            print(self.mainSet.subsets[nSubSetIndex][i])
         print("\n")
 
 def inthandler(signum, frame, setCover:SetCoverProblem):
@@ -238,7 +238,7 @@ if __name__ == "__main__":
     mainSet = Set()
     try:
         lineno = 0
-        with open("tests/"+filename+".txt", 'r') as gameFile:
+        with open("tests/original_problem_files/"+filename+".txt", 'r') as gameFile:
             line = gameFile.readline()
             while line != "":
                 if lineno == 0:
@@ -265,8 +265,8 @@ if __name__ == "__main__":
         print("Invalid Filename")
         exit(0)
 
-    aSolution = Solution()
-    bestSolution = Solution(mainSet.nSubSets-1)
+    aSolution = Solution(mainSet)
+    bestSolution = Solution(mainSet, mainSet.nSubSets-1)
     setCover = SetCoverProblem(mainSet, aSolution, bestSolution, 0)
     setCover.sortSubSets()
 
