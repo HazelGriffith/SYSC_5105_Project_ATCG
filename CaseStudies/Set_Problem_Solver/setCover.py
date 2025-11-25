@@ -3,14 +3,38 @@ import os
 
 class Set:
 
-    def __init__(self, nGlobalSetSize:int =0, nSubSets:int = 0, originalOrder:list[int] = [], nSubSetSizes:list[int] = [], subsets:list[list[int]] = [], subSetsSizesSum:list[list[int]] = []):
+    def __init__(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
         self.nGlobalSetSize = nGlobalSetSize
         self.nSubSets = nSubSets
-        self.originalOrder = originalOrder
-        self.nSubSetSizes = nSubSetSizes
-        self.subsets = subsets
-        self.subSetSizesSum = subSetsSizesSum
+        if originalOrder is None:
+            self.originalOrder = []
+        else:
+            self.originalOrder = originalOrder
 
+        if nSubSetSizes is None:
+            self.nSubSetSizes = []
+        else:
+            self.nSubSetSizes = nSubSetSizes
+
+        if subsets is None:
+            self.subsets = []
+        else:
+            self.subsets = subsets
+
+        if subSetsSizesSum is None:
+            self.subSetSizesSum = []
+        else:
+            self.subSetSizesSum = subSetsSizesSum
+
+    def copy(self):
+        newSet = Set()
+        newSet.nGlobalSetSize = self.nGlobalSetSize
+        newSet.nSubSets = self.nSubSets
+        newSet.originalOrder = self.originalOrder.copy()
+        newSet.nSubSetSizes = self.nSubSetSizes.copy()
+        newSet.subsets = self.subsets.copy()
+        newSet.subSetSizesSum = self.subSetSizesSum.copy()
+        return newSet
 
 class Solution:
 
@@ -147,7 +171,6 @@ class SetCoverProblem:
         if (self.checkSolution(solution)):
             if solution.nSolutionSize < self.bestSolution.nSolutionSize:
                 self.copySolutionToBest(solution)
-                print(f"New Solution Size: {self.bestSolution.nSolutionSize}\n")
 
             return
         
@@ -238,7 +261,7 @@ if __name__ == "__main__":
     mainSet = Set()
     try:
         lineno = 0
-        with open("tests/original_problem_files/"+filename+".txt", 'r') as gameFile:
+        with open("tests/"+filename+".txt", 'r') as gameFile:
             line = gameFile.readline()
             while line != "":
                 if lineno == 0:
@@ -251,7 +274,10 @@ if __name__ == "__main__":
                     nums = line.split(" ")
                     int_nums = []
                     for num in nums: 
-                        int_nums.append(int(num.replace("\n","")))
+                        if num.replace("\n","") != "":
+                            int_nums.append(int(num.replace("\n","")))
+                        else:
+                            nums.remove(num)    
                     subsetSize = len(nums)
                     mainSet.nSubSetSizes.append(subsetSize)
                     mainSet.subsets.append(int_nums)
