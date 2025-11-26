@@ -1,7 +1,7 @@
 import math
 
 
-class Quadratic_Equation_Problem:
+class Quadratic_Equation_Problem: # pragma: no cover
      
     def __init__(self, a, b, c, k = None):
         if k is None:
@@ -14,7 +14,7 @@ class Quadratic_Equation_Problem:
             self.c = c*k
           
 
-class NotEnoughPrecisionException(Exception):
+class NotEnoughPrecisionException(Exception): # pragma: no cover
 	
     def __init__(self, message):
         self.message = message
@@ -138,7 +138,7 @@ class Quadratic:
         return value
 	
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
 		
 	a = b = c = 0 
 		

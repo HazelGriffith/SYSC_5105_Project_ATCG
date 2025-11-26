@@ -1,4 +1,4 @@
-from quadratic_equation_solver import Quadratic, NotEnoughPrecisionException, Quadratic_Equation_Problem
+from ..src.quadratic_equation_solver import Quadratic, NotEnoughPrecisionException, Quadratic_Equation_Problem
 import random, math, os, pytest
 
 
@@ -90,33 +90,33 @@ def pytest_generate_tests(metafunc):
 def test_discriminants(get_discrim_tests):
     seed_problem = get_discrim_tests["seed_prob"]
 
-    seed_prop_holds = discriminant_property_check(seed_problem.a, seed_problem.b, seed_problem.c)
+    seed_prop_holds = discriminant_property_check(Quadratic.validateInput(str(seed_problem.a)), Quadratic.validateInput(str(seed_problem.b)), Quadratic.validateInput(str(seed_problem.c)))
 
     gen_problem = get_discrim_tests["gen_prob"]
 
-    gen_prop_holds = discriminant_property_check(gen_problem.a, gen_problem.b, gen_problem.c)
+    gen_prop_holds = discriminant_property_check(Quadratic.validateInput(str(gen_problem.a)), Quadratic.validateInput(str(gen_problem.b)), Quadratic.validateInput(str(gen_problem.c)))
 
     assert(seed_prop_holds == gen_prop_holds)
 
 def test_vieta(get_vieta_tests):
     seed_problem = get_vieta_tests["seed_prob"]
 
-    seed_prop_holds = vieta_property_check(seed_problem.a, seed_problem.b, seed_problem.c)
+    seed_prop_holds = vieta_property_check(Quadratic.validateInput(str(seed_problem.a)), Quadratic.validateInput(str(seed_problem.b)), Quadratic.validateInput(str(seed_problem.c)))
 
     gen_problem = get_vieta_tests["gen_prob"]
 
-    gen_prop_holds = vieta_property_check(gen_problem.a, gen_problem.b, gen_problem.c)
+    gen_prop_holds = vieta_property_check(Quadratic.validateInput(str(gen_problem.a)), Quadratic.validateInput(str(gen_problem.b)), Quadratic.validateInput(str(gen_problem.c)))
 
     assert(seed_prop_holds == gen_prop_holds)
 
 def test_eval(get_eval_tests):
     seed_problem = get_eval_tests["seed_prob"]
 
-    seed_prop_holds = evaluation_property_check(seed_problem.a, seed_problem.b, seed_problem.c)
+    seed_prop_holds = evaluation_property_check(Quadratic.validateInput(str(seed_problem.a)), Quadratic.validateInput(str(seed_problem.b)), Quadratic.validateInput(str(seed_problem.c)))
 
     gen_problem = get_eval_tests["gen_prob"]
 
-    gen_prop_holds = evaluation_property_check(gen_problem.a, gen_problem.b, gen_problem.c)
+    gen_prop_holds = evaluation_property_check(Quadratic.validateInput(str(gen_problem.a)), Quadratic.validateInput(str(gen_problem.b)), Quadratic.validateInput(str(gen_problem.c)))
 
     assert(seed_prop_holds == gen_prop_holds)
 
