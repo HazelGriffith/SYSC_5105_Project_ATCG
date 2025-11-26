@@ -7,7 +7,7 @@ Reads a problem file and obtains the mainSet object needed to represent and proc
 args: filename = string
 returns: mainSet = Set 
 '''
-def setup(filename:str) -> Set:
+def setup_problem(filename:str) -> Set:
     mainSet = Set()
     try:
         lineno = 0
@@ -64,7 +64,7 @@ save it as a new problem file, and repeat this "num" times for each metamorphic 
 args: filename = string, num = int
 '''
 def create_and_transform_problem(filename:str, num_of_tests_to_generate:int, num_of_redundant_subsets:int):
-    mainSet = setup("tests_used/"+filename)
+    mainSet = setup_problem("tests_used/"+filename)
 
     for i in range(num_of_tests_to_generate):
         new_relabeling_transformations(filename,mainSet.copy(),i)
@@ -138,7 +138,7 @@ def time_out_handler(signum, frame):
     raise Exception("Timed out")
 
 def solve_problem(filename:str):
-    mainSet = setup(filename)
+    mainSet = setup_problem(filename)
     aSolution = Solution(mainSet)
     bestSolution = Solution(mainSet, mainSet.nSubSets-1)
     setCover = SetCoverProblem(mainSet, aSolution, bestSolution, 0)
@@ -156,51 +156,66 @@ def solve_problem(filename:str):
 
     return setCover.bestSolution, timedOut
 
-def run_tests(filename:str, num_of_tests_to_generate:int, num_of_redundant_subsets:int):
-    #Run original problem and get result
-    seed_solution, seed_timedOut = solve_problem("tests_used/"+filename)
+def test_add_one_element(seed_solution, seed_timedOut:bool, gen_solution, gen_timedOut:bool, filename:str):
     seed_solution_size = seed_solution.nSolutionSize
-
-    gen_solution, gen_timedOut = solve_problem("transformed_problem_files/"+filename+"_transformations/add_new_element")
     gen_solution_size = gen_solution.nSolutionSize
 
     if (seed_timedOut or gen_timedOut):
         try:
-            assert(gen_solution_size >= seed_solution_size+1), f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}"
+            assert(gen_solution_size >= seed_solution_size+1), f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, timed out, in {filename}, add_one_element"
         except AssertionError as e:
-            print(f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}, timed out, add new element")
+            print(f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, timed out, in {filename}, add_one_element")
     else:
         try:
-            assert(gen_solution_size == seed_solution_size+1), f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}"
+            assert(gen_solution_size == seed_solution_size+1), f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}, add_one_element"
         except AssertionError as e:
-            print(f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}, add new element")
+            print(f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}, add_one_element")
+
+def test_relabeling(seed_solution, seed_timedOut:bool, gen_solution, gen_timedOut:bool, filename:str, i:int):
+    seed_solution_size = seed_solution.nSolutionSize
+    gen_solution_size = gen_solution.nSolutionSize
+
+    if not(seed_timedOut or gen_timedOut):
+        try:
+            assert(gen_solution_size <= seed_solution_size), f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}, relabeling {str(i)}"
+        except AssertionError as e:
+            print(f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}, relabeling {str(i)}")
+
+def test_add_redundant_set(seed_solution, seed_timedOut:bool, gen_solution, gen_timedOut:bool, filename:str, i:int):
+    seed_solution_size = seed_solution.nSolutionSize
+    gen_solution_size = gen_solution.nSolutionSize
+
+    if (seed_timedOut or gen_timedOut):
+        try:
+            assert(gen_solution_size <= seed_solution_size), f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, timed out, in {filename}, add_redundant_sets {str(i)}"
+        except AssertionError as e:
+            print(f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, timed out, in {filename}, add_redundant_sets {str(i)}")
+    else:
+        try:
+            assert(gen_solution_size == seed_solution_size), f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}, add_redundant_sets {str(i)}"
+        except AssertionError as e:
+            print(f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}, add_redundant_sets {str(i)}")
+
+def run_tests(filename:str, num_of_tests_to_generate:int, num_of_redundant_subsets:int):
+    #Run original problem and get result
+    seed_solution, seed_timedOut = solve_problem("tests_used/"+filename)
+    gen_solution, gen_timedOut = solve_problem("transformed_problem_files/"+filename+"_transformations/add_new_element")
+    
+    test_add_one_element(seed_solution, seed_timedOut, gen_solution, gen_timedOut, filename)
 
     for i in range(num_of_tests_to_generate):
         #tests add redundant subsets MR
         gen_solution, gen_timedOut = solve_problem("transformed_problem_files/"+filename+"_transformations/add_redundant_sets/"+str(i))
-        gen_solution_size = gen_solution.nSolutionSize
-        if not(seed_timedOut or gen_timedOut):
-            try:
-                assert(gen_solution_size <= seed_solution_size), f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}"
-            except AssertionError as e:
-                print(f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}, add redundant subsets {i}")
+        
+        test_relabeling(seed_solution, seed_timedOut, gen_solution, gen_timedOut, filename, i)
 
         #tests relabeling MR
         gen_solution, gen_timedOut = solve_problem("transformed_problem_files/"+filename+"_transformations/relabeling/"+str(i))
-        gen_solution_size = gen_solution.nSolutionSize
-        if (seed_timedOut or gen_timedOut):
-            try:
-                assert(gen_solution_size <= seed_solution_size), f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}"
-            except AssertionError as e:
-                print(f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}, timed out, relabeling {i}")
-        else:
-            try:
-                assert(gen_solution_size == seed_solution_size), f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}"
-            except AssertionError as e:
-                print(f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {filename}, relabeling {i}")
+        
+        test_add_redundant_set(seed_solution, seed_timedOut, gen_solution, gen_timedOut, filename, i)
 
-if __name__ == "__main__":
 
+def main():
     num_of_tests_to_generate = 2
     num_of_redundant_subsets = 3
 
@@ -212,15 +227,24 @@ if __name__ == "__main__":
     elif cwd.endswith("Studies"):
         os.chdir("Set_Problem_Solver")
 
+    generate = input("Generate new tests? (y/n): ")
+
     testEntries = os.listdir("tests/tests_used/")
-    for pos, entry in enumerate(testEntries):
-        foldername = entry.replace(".txt","")
-        if os.path.exists(os.path.join(cwd,f"tests/transformed_problem_files/{foldername}_transformations")):
-            shutil.rmtree(f"tests/transformed_problem_files/{foldername}_transformations")
-        os.makedirs(f"tests/transformed_problem_files/{foldername}_transformations/relabeling/", exist_ok=True)
-        os.makedirs(f"tests/transformed_problem_files/{foldername}_transformations/add_redundant_sets/", exist_ok=True)
+
+    if (generate.casefold() == "y"):
+        for pos, entry in enumerate(testEntries):
+            foldername = entry.replace(".txt","")
+            if os.path.exists(os.path.join(cwd,f"tests/transformed_problem_files/{foldername}_transformations")):
+                shutil.rmtree(f"tests/transformed_problem_files/{foldername}_transformations")
+            os.makedirs(f"tests/transformed_problem_files/{foldername}_transformations/relabeling/", exist_ok=True)
+            os.makedirs(f"tests/transformed_problem_files/{foldername}_transformations/add_redundant_sets/", exist_ok=True)
     
     #here we generate the transformations of each problem file
     for entry in testEntries:
-        create_and_transform_problem(entry.replace(".txt",""),num_of_tests_to_generate,num_of_redundant_subsets)
+        if (generate.casefold() == "y"):
+            create_and_transform_problem(entry.replace(".txt",""),num_of_tests_to_generate,num_of_redundant_subsets)
         run_tests(entry.replace(".txt",""),num_of_tests_to_generate, num_of_redundant_subsets)
+
+if __name__ == "__main__":
+    main()
+    
