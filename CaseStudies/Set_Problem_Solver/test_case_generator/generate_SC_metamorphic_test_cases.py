@@ -1,4 +1,4 @@
-from CaseStudies.Set_Problem_Solver.src.setCover import SetCoverProblem, Solution, Set
+from ..src.setCover import SetCoverProblem, Solution, Set
 import random, os, signal, shutil
 
 

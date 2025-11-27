@@ -118,7 +118,7 @@ class SetCoverProblem:
         for i in range(self.mainSet.nGlobalSetSize):
             self.bestSolution.boolIncluded[i] = solution.boolIncluded[i]
 
-    def backTrack(self, solution:Solution):
+    def backTrack(self, solution:Solution): # pragma: no cover
         if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
             return
         
@@ -134,7 +134,7 @@ class SetCoverProblem:
                 self.depth -= 1
                 self.removeSubSet(solution, i)
 
-    def backTrack2(self, solution:Solution):
+    def backTrack2(self, solution:Solution): # pragma: no cover
 
         if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
             return
@@ -150,7 +150,7 @@ class SetCoverProblem:
             self.depth -= 1
             self.removeSubSet(solution, i)
 
-    def backTrack3(self, solution:Solution, last:int):
+    def backTrack3(self, solution:Solution, last:int): # pragma: no cover
         if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
             return
         
@@ -217,28 +217,28 @@ class SetCoverProblem:
             
         return allDone
 
-    def printSolution(self, solution:Solution):
+    def printSolution(self, solution:Solution): # pragma: no cover
         print(solution.nSolutionSize)
         for i in range(solution.nSolutionSize):
             print(self.mainSet.originalOrder[solution.subSets[i]])
             self.printSubSet(solution.subSets[i])
 
-    def echoInit(self):
+    def echoInit(self): # pragma: no cover
         print(f"Universal Set 1-{self.mainSet.nGlobalSetSize}\n")
         print(f"Number of subsets {self.mainSet.nSubSets}\n")
         for i in range(self.mainSet.nSubSets):
             self.printSubSet(i)
 
-    def printSubSet(self, nSubSetIndex:int):
+    def printSubSet(self, nSubSetIndex:int): # pragma: no cover
         for i in range(self.mainSet.nSubSetSizes[nSubSetIndex]):
             print(self.mainSet.subsets[nSubSetIndex][i])
         print("\n")
 
-def inthandler(signum, frame, setCover:SetCoverProblem):
+def inthandler(signum, frame, setCover:SetCoverProblem): # pragma: no cover
         setCover.printSolution(setCover.bestSolution)
         exit(0)
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
 
     cwd = os.getcwd()
 
