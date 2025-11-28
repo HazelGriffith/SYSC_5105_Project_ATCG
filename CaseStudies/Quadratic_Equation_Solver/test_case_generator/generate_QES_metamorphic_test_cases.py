@@ -1,4 +1,4 @@
-from ..src.quadratic_equation_solver import Quadratic, NotEnoughPrecisionException
+from source.quadratic_equation_solver import Quadratic, NotEnoughPrecisionException
 import random, math, os
 
 '''

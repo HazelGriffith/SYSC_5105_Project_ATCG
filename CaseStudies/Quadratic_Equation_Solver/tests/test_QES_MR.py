@@ -1,6 +1,6 @@
-from ..src.quadratic_equation_solver import Quadratic, NotEnoughPrecisionException, Quadratic_Equation_Problem
+from source.quadratic_equation_solver import Quadratic
+from source.quadratic_equation_problem import Quadratic_Equation_Problem
 import random, math, os, pytest
-
 
 disc_tests = {}
 eval_tests = {}
@@ -29,7 +29,7 @@ def simplify_complex_num(number:str) -> str:
         return number
 
 def load_tests(filename:str):
-    with open(f"tests/tests_used/{filename}.txt", "r") as tests_file:
+    with open(f"../test_cases/tests_used/{filename}.txt", "r") as tests_file:
         line = tests_file.readline()
         lineNo = 1
         tests = {}
