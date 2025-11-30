@@ -1,5 +1,6 @@
-from source.quadratic_equation_solver import Quadratic
+from source.quadratic_equation_solver import solveQuadratic, validateInput
 from source.quadratic_equation_problem import Quadratic_Equation_Problem
+from source.notEnoughPrecisionException import NotEnoughPrecisionException
 import random, math, os, pytest
 
 disc_tests = {}
@@ -29,7 +30,7 @@ def simplify_complex_num(number:str) -> str:
         return number
 
 def load_tests(filename:str):
-    with open(f"../test_cases/tests_used/{filename}.txt", "r") as tests_file:
+    with open(f"tests/test_cases/tests_used/{filename}.txt", "r") as tests_file:
         line = tests_file.readline()
         lineNo = 1
         tests = {}
@@ -56,6 +57,7 @@ def load_tests(filename:str):
     return tests
 
 cwd = os.getcwd()
+print(cwd)
 if cwd.endswith("ATCG"):
     os.chdir("CaseStudies/Quadratic_Equation_Solver")
 elif cwd.endswith("Studies"):
@@ -90,35 +92,35 @@ def pytest_generate_tests(metafunc):
 def test_discriminants(get_discrim_tests):
     seed_problem = get_discrim_tests["seed_prob"]
 
-    seed_prop_holds = discriminant_property_check(Quadratic.validateInput(str(seed_problem.a)), Quadratic.validateInput(str(seed_problem.b)), Quadratic.validateInput(str(seed_problem.c)))
+    seed_prop_holds = discriminant_property_check(validateInput(str(seed_problem.a)), validateInput(str(seed_problem.b)), validateInput(str(seed_problem.c)))
 
     gen_problem = get_discrim_tests["gen_prob"]
 
-    gen_prop_holds = discriminant_property_check(Quadratic.validateInput(str(gen_problem.a)), Quadratic.validateInput(str(gen_problem.b)), Quadratic.validateInput(str(gen_problem.c)))
+    gen_prop_holds = discriminant_property_check(validateInput(str(gen_problem.a)), validateInput(str(gen_problem.b)), validateInput(str(gen_problem.c)))
 
-    assert(seed_prop_holds == gen_prop_holds)
+    assert(seed_prop_holds and gen_prop_holds)
 
 def test_vieta(get_vieta_tests):
     seed_problem = get_vieta_tests["seed_prob"]
 
-    seed_prop_holds = vieta_property_check(Quadratic.validateInput(str(seed_problem.a)), Quadratic.validateInput(str(seed_problem.b)), Quadratic.validateInput(str(seed_problem.c)))
+    seed_prop_holds = vieta_property_check(validateInput(str(seed_problem.a)), validateInput(str(seed_problem.b)), validateInput(str(seed_problem.c)))
 
     gen_problem = get_vieta_tests["gen_prob"]
 
-    gen_prop_holds = vieta_property_check(Quadratic.validateInput(str(gen_problem.a)), Quadratic.validateInput(str(gen_problem.b)), Quadratic.validateInput(str(gen_problem.c)))
+    gen_prop_holds = vieta_property_check(validateInput(str(gen_problem.a)), validateInput(str(gen_problem.b)), validateInput(str(gen_problem.c)))
 
-    assert(seed_prop_holds == gen_prop_holds)
+    assert(seed_prop_holds and gen_prop_holds)
 
 def test_eval(get_eval_tests):
     seed_problem = get_eval_tests["seed_prob"]
 
-    seed_prop_holds = evaluation_property_check(Quadratic.validateInput(str(seed_problem.a)), Quadratic.validateInput(str(seed_problem.b)), Quadratic.validateInput(str(seed_problem.c)))
+    seed_prop_holds = evaluation_property_check(validateInput(str(seed_problem.a)), validateInput(str(seed_problem.b)), validateInput(str(seed_problem.c)))
 
     gen_problem = get_eval_tests["gen_prob"]
 
-    gen_prop_holds = evaluation_property_check(Quadratic.validateInput(str(gen_problem.a)), Quadratic.validateInput(str(gen_problem.b)), Quadratic.validateInput(str(gen_problem.c)))
+    gen_prop_holds = evaluation_property_check(validateInput(str(gen_problem.a)), validateInput(str(gen_problem.b)), validateInput(str(gen_problem.c)))
 
-    assert(seed_prop_holds == gen_prop_holds)
+    assert(seed_prop_holds and gen_prop_holds)
 
 '''
 discriminant metamorphic relation tests
@@ -138,7 +140,7 @@ def discriminant_property_check(a:int, b:int, c:int) -> bool:
         expRoots = "2 complex"
 
     try:
-        result = Quadratic.solveQuadratic(a, b, c)
+        result = solveQuadratic(a, b, c)
         if len(result.split("\n")) > 1:
             actualRoots = "2"
             x1,x2 = result.split("\n")
@@ -165,7 +167,7 @@ Vieta's sum: x1 + x2 = -b/a
 def vieta_property_check(a:int, b:int, c:int) -> bool:
 
     try:
-        result = Quadratic.solveQuadratic(a, b, c)
+        result = solveQuadratic(a, b, c)
         line2 = ""
         x2 = None
 
@@ -203,7 +205,7 @@ ax**2 + bx**2 + c = 0
 '''
 def evaluation_property_check(a:int, b:int, c:int) -> bool:
     try:
-        result = Quadratic.solveQuadratic(a, b, c)
+        result = solveQuadratic(a, b, c)
         line2 = ""
         x2 = None
 
@@ -226,8 +228,8 @@ def evaluation_property_check(a:int, b:int, c:int) -> bool:
         evalx1 = a*(x1**2)+b*x1+c
         evalx2 = a*(x2**2)+b*x2+c
 
-        evalx1_prop = math.isclose(evalx1.real,0,abs_tol=1e-9)
-        evalx2_prop = math.isclose(evalx2.real,0,abs_tol=1e-9)
+        evalx1_prop = math.isclose(evalx1.real,0.0,abs_tol=1e-9)
+        evalx2_prop = math.isclose(evalx2.real,0.0,abs_tol=1e-9)
 
         return evalx1_prop and evalx2_prop
     

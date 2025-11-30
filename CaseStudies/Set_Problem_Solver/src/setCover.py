@@ -261,7 +261,7 @@ if __name__ == "__main__": # pragma: no cover
     mainSet = Set()
     try:
         lineno = 0
-        with open("tests/"+filename+".txt", 'r') as gameFile:
+        with open("../tests/"+filename+".txt", 'r') as gameFile:
             line = gameFile.readline()
             while line != "":
                 if lineno == 0:

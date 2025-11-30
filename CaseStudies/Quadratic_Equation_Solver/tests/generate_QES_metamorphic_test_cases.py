@@ -1,4 +1,5 @@
-from source.quadratic_equation_solver import Quadratic, NotEnoughPrecisionException
+from source.notEnoughPrecisionException import NotEnoughPrecisionException
+from source.quadratic_equation_solver import validateInput, solveQuadratic
 import random, math, os
 
 '''
@@ -38,7 +39,10 @@ def test_discriminant(a:int, b:int, c:int) -> bool:
         expRoots = "2 complex"
 
     try:
-        result = Quadratic.solveQuadratic(a, b, c)
+        validateInput(str(a))
+        validateInput(str(b))
+        validateInput(str(c))
+        result = solveQuadratic(a, b, c)
         if len(result.split("\n")) > 1:
             actualRoots = "2"
             x1,x2 = result.split("\n")
@@ -68,7 +72,10 @@ Vieta's sum: x1 + x2 = -b/a
 def test_vieta(a:int, b:int, c:int) -> bool:
 
     try:
-        result = Quadratic.solveQuadratic(a, b, c)
+        validateInput(str(a))
+        validateInput(str(b))
+        validateInput(str(c))
+        result = solveQuadratic(a, b, c)
         line2 = ""
         x2 = None
 
@@ -106,7 +113,10 @@ ax**2 + bx**2 + c = 0
 '''
 def test_evaluation(a:int, b:int, c:int) -> bool:
     try:
-        result = Quadratic.solveQuadratic(a, b, c)
+        validateInput(str(a))
+        validateInput(str(b))
+        validateInput(str(c))
+        result = solveQuadratic(a, b, c)
         line2 = ""
         x2 = None
 
@@ -283,20 +293,21 @@ def run_and_generate_evaluation_tests(low:int, high:int, trials:int):
 
 def save(tests:list[str], filename:str):
     try:
-        with open(f"tests/new_tests/{filename}.txt", "x") as newFile:
+        with open(f"tests/test_cases/new_tests/{filename}.txt", "x") as newFile:
             for trial in tests:
                 newFile.write(trial+"\n")
     except Exception as e:
-        os.remove(f"tests/new_tests/{filename}.txt")
+        os.remove(f"tests/test_cases/new_tests/{filename}.txt")
         save(tests, filename)
 
 if __name__ == "__main__":
     cwd = os.getcwd()
+    print(cwd)
     if cwd.endswith("ATCG"):
         os.chdir("CaseStudies/Quadratic_Equation_Solver")
     elif cwd.endswith("Studies"):
         os.chdir("Quadratic_Equation_Solver")
-
+    print(cwd)
     disc_tests = run_and_generate_discriminant_tests()
     vieta_tests = run_and_generate_vieta_tests()
     eval_tests = run_and_generate_evaluation_tests(-1000,1000,5)
