@@ -1,4 +1,4 @@
-from ..src.setCover import SetCoverProblem, Solution, Set
+from source.setCover import SetCoverProblem, Solution, Set
 import os, signal, pytest
 
 
@@ -17,7 +17,7 @@ def setup_problem(filename:str) -> Set:
     mainSet = Set()
     try:
         lineno = 0
-        with open("tests/"+filename+".txt", 'r') as gameFile:
+        with open("tests/test_cases/"+filename+".txt", 'r') as gameFile:
             line = gameFile.readline()
             while line != "":
                 if lineno == 0:
@@ -76,14 +76,14 @@ if cwd.endswith("ATCG"):
 elif cwd.endswith("Studies"):
     os.chdir("Set_Problem_Solver")
 
-testEntries = os.listdir("tests/tests_used/")
+testEntries = os.listdir("tests/test_cases/tests_used/")
 
 for entry in testEntries:
     filename = entry.replace(".txt","")
     seed_solution, seed_timedOut = solve_problem(f"tests_used/{filename}")
 
     relabeling_problem_folder = f"transformed_problem_files/{filename}_transformations/relabeling/"
-    relabeling_problem_files = os.listdir("tests/"+relabeling_problem_folder)
+    relabeling_problem_files = os.listdir("tests/test_cases/"+relabeling_problem_folder)
 
     for num, prob in enumerate(relabeling_problem_files):
         relabeling_transforms_per_problem.update({f"{filename} {str(num)}" : {"seed_solution" : seed_solution, "seed_timedOut" : seed_timedOut, "gen_prob_filename" : relabeling_problem_folder + prob.replace(".txt",""), "seed_prob_filename" : filename}})
@@ -91,7 +91,7 @@ for entry in testEntries:
     add_one_element_transforms_per_problem.update({filename : {"seed_solution" : seed_solution, "seed_timedOut" : seed_timedOut, "gen_prob_filename" : f"transformed_problem_files/{filename}_transformations/add_new_element", "seed_prob_filename" : filename}})
 
     add_redundant_sets_problem_folder = f"transformed_problem_files/{filename}_transformations/add_redundant_sets/"
-    add_redundant_sets_problem_files = os.listdir("tests/"+add_redundant_sets_problem_folder)
+    add_redundant_sets_problem_files = os.listdir("tests/test_cases/"+add_redundant_sets_problem_folder)
 
     for num, prob in enumerate(add_redundant_sets_problem_files):
         add_redundant_sets_transforms_per_problem.update({f"{filename} {str(num)}" : {"seed_solution" : seed_solution, "seed_timedOut" : seed_timedOut, "gen_prob_filename" : add_redundant_sets_problem_folder + prob.replace(".txt",""), "seed_prob_filename" : filename}})

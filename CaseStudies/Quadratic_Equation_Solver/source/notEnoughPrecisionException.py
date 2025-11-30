@@ -1,4 +1,4 @@
-class NotEnoughPrecisionException(Exception): # pragma: no mutate
+class NotEnoughPrecisionException(Exception): # pragma: no cover
 	
     def __init__(self, message):
         self.message = message

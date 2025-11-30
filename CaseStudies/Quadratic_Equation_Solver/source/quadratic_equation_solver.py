@@ -105,7 +105,7 @@ def validateInput(input: str) -> float:
     return value
 
 
-if __name__ == "__main__":  # pragma: no mutate
+if __name__ == "__main__":  # pragma: no cover
 
     a = b = c = 0
 

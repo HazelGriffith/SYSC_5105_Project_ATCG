@@ -1,4 +1,4 @@
-from ..src.setCover import SetCoverProblem, Solution, Set
+from source.setCover import SetCoverProblem, Solution, Set
 import random, os, signal, shutil
 
 
