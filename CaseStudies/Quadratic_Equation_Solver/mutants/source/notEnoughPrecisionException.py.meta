@@ -1,0 +1,12 @@
+{
+    "exit_code_by_key": {
+        "source.notEnoughPrecisionException.x\u01c1NotEnoughPrecisionException\u01c1__init____mutmut_1": 33,
+        "source.notEnoughPrecisionException.x\u01c1NotEnoughPrecisionException\u01c1__init____mutmut_2": 33
+    },
+    "hash_by_function_name": {},
+    "durations_by_key": {},
+    "estimated_durations_by_key": {
+        "source.notEnoughPrecisionException.x\u01c1NotEnoughPrecisionException\u01c1__init____mutmut_1": 0,
+        "source.notEnoughPrecisionException.x\u01c1NotEnoughPrecisionException\u01c1__init____mutmut_2": 0
+    }
+}
