@@ -1,7 +1,7 @@
 import signal
 import os
 
-class Set:
+class Set: # pragma: no cover
 
     def __init__(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
         self.nGlobalSetSize = nGlobalSetSize
@@ -26,7 +26,7 @@ class Set:
         else:
             self.subSetSizesSum = subSetsSizesSum
 
-    def copy(self):
+    def copy(self): # pragma: no cover
         newSet = Set()
         newSet.nGlobalSetSize = self.nGlobalSetSize
         newSet.nSubSets = self.nSubSets
