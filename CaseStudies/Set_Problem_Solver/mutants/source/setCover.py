@@ -1,5 +1,6 @@
 import signal
 import os
+from pathlib import Path
 from inspect import signature as _mutmut_signature
 from typing import Annotated
 from typing import Callable
@@ -26,14 +27,14 @@ def _mutmut_trampoline(orig, mutants, call_args, call_kwargs, self_arg = None):
         result = orig(*call_args, **call_kwargs)
         return result
     mutant_name = mutant_under_test.rpartition('.')[-1]
-    if self_arg is not None:
+    if self_arg:
         # call to a class method where self is not bound
         result = mutants[mutant_name](self_arg, *call_args, **call_kwargs)
     else:
         result = mutants[mutant_name](*call_args, **call_kwargs)
     return result
 
-class Set: # pragma: no cover
+class Set:
 
     def xǁSetǁ__init____mutmut_orig(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
         self.nGlobalSetSize = nGlobalSetSize
@@ -202,9 +203,9 @@ class Set: # pragma: no cover
         if originalOrder is None:
             self.originalOrder = []
         else:
-            self.originalOrder = originalOrder
+            self.originalOrder = None
 
-        if nSubSetSizes is not None:
+        if nSubSetSizes is None:
             self.nSubSetSizes = []
         else:
             self.nSubSetSizes = nSubSetSizes
@@ -227,8 +228,8 @@ class Set: # pragma: no cover
         else:
             self.originalOrder = originalOrder
 
-        if nSubSetSizes is None:
-            self.nSubSetSizes = None
+        if nSubSetSizes is not None:
+            self.nSubSetSizes = []
         else:
             self.nSubSetSizes = nSubSetSizes
 
@@ -251,6 +252,52 @@ class Set: # pragma: no cover
             self.originalOrder = originalOrder
 
         if nSubSetSizes is None:
+            self.nSubSetSizes = None
+        else:
+            self.nSubSetSizes = nSubSetSizes
+
+        if subsets is None:
+            self.subsets = []
+        else:
+            self.subsets = subsets
+
+        if subSetsSizesSum is None:
+            self.subSetSizesSum = []
+        else:
+            self.subSetSizesSum = subSetsSizesSum
+
+    def xǁSetǁ__init____mutmut_10(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
+        self.nGlobalSetSize = nGlobalSetSize
+        self.nSubSets = nSubSets
+        if originalOrder is None:
+            self.originalOrder = []
+        else:
+            self.originalOrder = originalOrder
+
+        if nSubSetSizes is None:
+            self.nSubSetSizes = []
+        else:
+            self.nSubSetSizes = None
+
+        if subsets is None:
+            self.subsets = []
+        else:
+            self.subsets = subsets
+
+        if subSetsSizesSum is None:
+            self.subSetSizesSum = []
+        else:
+            self.subSetSizesSum = subSetsSizesSum
+
+    def xǁSetǁ__init____mutmut_11(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
+        self.nGlobalSetSize = nGlobalSetSize
+        self.nSubSets = nSubSets
+        if originalOrder is None:
+            self.originalOrder = []
+        else:
+            self.originalOrder = originalOrder
+
+        if nSubSetSizes is None:
             self.nSubSetSizes = []
         else:
             self.nSubSetSizes = nSubSetSizes
@@ -265,7 +312,7 @@ class Set: # pragma: no cover
         else:
             self.subSetSizesSum = subSetsSizesSum
 
-    def xǁSetǁ__init____mutmut_10(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
+    def xǁSetǁ__init____mutmut_12(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
         self.nGlobalSetSize = nGlobalSetSize
         self.nSubSets = nSubSets
         if originalOrder is None:
@@ -288,7 +335,30 @@ class Set: # pragma: no cover
         else:
             self.subSetSizesSum = subSetsSizesSum
 
-    def xǁSetǁ__init____mutmut_11(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
+    def xǁSetǁ__init____mutmut_13(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
+        self.nGlobalSetSize = nGlobalSetSize
+        self.nSubSets = nSubSets
+        if originalOrder is None:
+            self.originalOrder = []
+        else:
+            self.originalOrder = originalOrder
+
+        if nSubSetSizes is None:
+            self.nSubSetSizes = []
+        else:
+            self.nSubSetSizes = nSubSetSizes
+
+        if subsets is None:
+            self.subsets = []
+        else:
+            self.subsets = None
+
+        if subSetsSizesSum is None:
+            self.subSetSizesSum = []
+        else:
+            self.subSetSizesSum = subSetsSizesSum
+
+    def xǁSetǁ__init____mutmut_14(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
         self.nGlobalSetSize = nGlobalSetSize
         self.nSubSets = nSubSets
         if originalOrder is None:
@@ -311,7 +381,7 @@ class Set: # pragma: no cover
         else:
             self.subSetSizesSum = subSetsSizesSum
 
-    def xǁSetǁ__init____mutmut_12(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
+    def xǁSetǁ__init____mutmut_15(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
         self.nGlobalSetSize = nGlobalSetSize
         self.nSubSets = nSubSets
         if originalOrder is None:
@@ -333,6 +403,29 @@ class Set: # pragma: no cover
             self.subSetSizesSum = None
         else:
             self.subSetSizesSum = subSetsSizesSum
+
+    def xǁSetǁ__init____mutmut_16(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
+        self.nGlobalSetSize = nGlobalSetSize
+        self.nSubSets = nSubSets
+        if originalOrder is None:
+            self.originalOrder = []
+        else:
+            self.originalOrder = originalOrder
+
+        if nSubSetSizes is None:
+            self.nSubSetSizes = []
+        else:
+            self.nSubSetSizes = nSubSetSizes
+
+        if subsets is None:
+            self.subsets = []
+        else:
+            self.subsets = subsets
+
+        if subSetsSizesSum is None:
+            self.subSetSizesSum = []
+        else:
+            self.subSetSizesSum = None
     
     xǁSetǁ__init____mutmut_mutants : ClassVar[MutantDict] = {
     'xǁSetǁ__init____mutmut_1': xǁSetǁ__init____mutmut_1, 
@@ -346,7 +439,11 @@ class Set: # pragma: no cover
         'xǁSetǁ__init____mutmut_9': xǁSetǁ__init____mutmut_9, 
         'xǁSetǁ__init____mutmut_10': xǁSetǁ__init____mutmut_10, 
         'xǁSetǁ__init____mutmut_11': xǁSetǁ__init____mutmut_11, 
-        'xǁSetǁ__init____mutmut_12': xǁSetǁ__init____mutmut_12
+        'xǁSetǁ__init____mutmut_12': xǁSetǁ__init____mutmut_12, 
+        'xǁSetǁ__init____mutmut_13': xǁSetǁ__init____mutmut_13, 
+        'xǁSetǁ__init____mutmut_14': xǁSetǁ__init____mutmut_14, 
+        'xǁSetǁ__init____mutmut_15': xǁSetǁ__init____mutmut_15, 
+        'xǁSetǁ__init____mutmut_16': xǁSetǁ__init____mutmut_16
     }
     
     def __init__(self, *args, **kwargs):
@@ -356,7 +453,7 @@ class Set: # pragma: no cover
     __init__.__signature__ = _mutmut_signature(xǁSetǁ__init____mutmut_orig)
     xǁSetǁ__init____mutmut_orig.__name__ = 'xǁSetǁ__init__'
 
-    def copy(self): # pragma: no cover
+    def xǁSetǁcopy__mutmut_orig(self):
         newSet = Set()
         newSet.nGlobalSetSize = self.nGlobalSetSize
         newSet.nSubSets = self.nSubSets
@@ -365,6 +462,93 @@ class Set: # pragma: no cover
         newSet.subsets = self.subsets.copy()
         newSet.subSetSizesSum = self.subSetSizesSum.copy()
         return newSet
+
+    def xǁSetǁcopy__mutmut_1(self):
+        newSet = None
+        newSet.nGlobalSetSize = self.nGlobalSetSize
+        newSet.nSubSets = self.nSubSets
+        newSet.originalOrder = self.originalOrder.copy()
+        newSet.nSubSetSizes = self.nSubSetSizes.copy()
+        newSet.subsets = self.subsets.copy()
+        newSet.subSetSizesSum = self.subSetSizesSum.copy()
+        return newSet
+
+    def xǁSetǁcopy__mutmut_2(self):
+        newSet = Set()
+        newSet.nGlobalSetSize = None
+        newSet.nSubSets = self.nSubSets
+        newSet.originalOrder = self.originalOrder.copy()
+        newSet.nSubSetSizes = self.nSubSetSizes.copy()
+        newSet.subsets = self.subsets.copy()
+        newSet.subSetSizesSum = self.subSetSizesSum.copy()
+        return newSet
+
+    def xǁSetǁcopy__mutmut_3(self):
+        newSet = Set()
+        newSet.nGlobalSetSize = self.nGlobalSetSize
+        newSet.nSubSets = None
+        newSet.originalOrder = self.originalOrder.copy()
+        newSet.nSubSetSizes = self.nSubSetSizes.copy()
+        newSet.subsets = self.subsets.copy()
+        newSet.subSetSizesSum = self.subSetSizesSum.copy()
+        return newSet
+
+    def xǁSetǁcopy__mutmut_4(self):
+        newSet = Set()
+        newSet.nGlobalSetSize = self.nGlobalSetSize
+        newSet.nSubSets = self.nSubSets
+        newSet.originalOrder = None
+        newSet.nSubSetSizes = self.nSubSetSizes.copy()
+        newSet.subsets = self.subsets.copy()
+        newSet.subSetSizesSum = self.subSetSizesSum.copy()
+        return newSet
+
+    def xǁSetǁcopy__mutmut_5(self):
+        newSet = Set()
+        newSet.nGlobalSetSize = self.nGlobalSetSize
+        newSet.nSubSets = self.nSubSets
+        newSet.originalOrder = self.originalOrder.copy()
+        newSet.nSubSetSizes = None
+        newSet.subsets = self.subsets.copy()
+        newSet.subSetSizesSum = self.subSetSizesSum.copy()
+        return newSet
+
+    def xǁSetǁcopy__mutmut_6(self):
+        newSet = Set()
+        newSet.nGlobalSetSize = self.nGlobalSetSize
+        newSet.nSubSets = self.nSubSets
+        newSet.originalOrder = self.originalOrder.copy()
+        newSet.nSubSetSizes = self.nSubSetSizes.copy()
+        newSet.subsets = None
+        newSet.subSetSizesSum = self.subSetSizesSum.copy()
+        return newSet
+
+    def xǁSetǁcopy__mutmut_7(self):
+        newSet = Set()
+        newSet.nGlobalSetSize = self.nGlobalSetSize
+        newSet.nSubSets = self.nSubSets
+        newSet.originalOrder = self.originalOrder.copy()
+        newSet.nSubSetSizes = self.nSubSetSizes.copy()
+        newSet.subsets = self.subsets.copy()
+        newSet.subSetSizesSum = None
+        return newSet
+    
+    xǁSetǁcopy__mutmut_mutants : ClassVar[MutantDict] = {
+    'xǁSetǁcopy__mutmut_1': xǁSetǁcopy__mutmut_1, 
+        'xǁSetǁcopy__mutmut_2': xǁSetǁcopy__mutmut_2, 
+        'xǁSetǁcopy__mutmut_3': xǁSetǁcopy__mutmut_3, 
+        'xǁSetǁcopy__mutmut_4': xǁSetǁcopy__mutmut_4, 
+        'xǁSetǁcopy__mutmut_5': xǁSetǁcopy__mutmut_5, 
+        'xǁSetǁcopy__mutmut_6': xǁSetǁcopy__mutmut_6, 
+        'xǁSetǁcopy__mutmut_7': xǁSetǁcopy__mutmut_7
+    }
+    
+    def copy(self, *args, **kwargs):
+        result = _mutmut_trampoline(object.__getattribute__(self, "xǁSetǁcopy__mutmut_orig"), object.__getattribute__(self, "xǁSetǁcopy__mutmut_mutants"), args, kwargs, self)
+        return result 
+    
+    copy.__signature__ = _mutmut_signature(xǁSetǁcopy__mutmut_orig)
+    xǁSetǁcopy__mutmut_orig.__name__ = 'xǁSetǁcopy'
 
 class Solution:
 
@@ -2115,14 +2299,14 @@ class SetCoverProblem:
 
     def xǁSetCoverProblemǁcopySolutionToBest__mutmut_orig(self, solution:Solution):
         self.bestSolution.nSolutionSize = solution.nSolutionSize
-        for i in range(solution.nSolutionSize):
+        for i in range(len(solution.subSets)):
             self.bestSolution.subSets[i] = solution.subSets[i]
         for i in range(self.mainSet.nGlobalSetSize):
             self.bestSolution.boolIncluded[i] = solution.boolIncluded[i]
 
     def xǁSetCoverProblemǁcopySolutionToBest__mutmut_1(self, solution:Solution):
         self.bestSolution.nSolutionSize = None
-        for i in range(solution.nSolutionSize):
+        for i in range(len(solution.subSets)):
             self.bestSolution.subSets[i] = solution.subSets[i]
         for i in range(self.mainSet.nGlobalSetSize):
             self.bestSolution.boolIncluded[i] = solution.boolIncluded[i]
@@ -2136,21 +2320,21 @@ class SetCoverProblem:
 
     def xǁSetCoverProblemǁcopySolutionToBest__mutmut_3(self, solution:Solution):
         self.bestSolution.nSolutionSize = solution.nSolutionSize
-        for i in range(solution.nSolutionSize):
+        for i in range(len(solution.subSets)):
             self.bestSolution.subSets[i] = None
         for i in range(self.mainSet.nGlobalSetSize):
             self.bestSolution.boolIncluded[i] = solution.boolIncluded[i]
 
     def xǁSetCoverProblemǁcopySolutionToBest__mutmut_4(self, solution:Solution):
         self.bestSolution.nSolutionSize = solution.nSolutionSize
-        for i in range(solution.nSolutionSize):
+        for i in range(len(solution.subSets)):
             self.bestSolution.subSets[i] = solution.subSets[i]
         for i in range(None):
             self.bestSolution.boolIncluded[i] = solution.boolIncluded[i]
 
     def xǁSetCoverProblemǁcopySolutionToBest__mutmut_5(self, solution:Solution):
         self.bestSolution.nSolutionSize = solution.nSolutionSize
-        for i in range(solution.nSolutionSize):
+        for i in range(len(solution.subSets)):
             self.bestSolution.subSets[i] = solution.subSets[i]
         for i in range(self.mainSet.nGlobalSetSize):
             self.bestSolution.boolIncluded[i] = None
@@ -2170,7 +2354,7 @@ class SetCoverProblem:
     copySolutionToBest.__signature__ = _mutmut_signature(xǁSetCoverProblemǁcopySolutionToBest__mutmut_orig)
     xǁSetCoverProblemǁcopySolutionToBest__mutmut_orig.__name__ = 'xǁSetCoverProblemǁcopySolutionToBest'
 
-    def backTrack(self, solution:Solution): # pragma: no cover
+    def xǁSetCoverProblemǁbackTrack__mutmut_orig(self, solution:Solution):
         if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
             return
         
@@ -2186,7 +2370,459 @@ class SetCoverProblem:
                 self.depth -= 1
                 self.removeSubSet(solution, i)
 
-    def backTrack2(self, solution:Solution): # pragma: no cover
+    def xǁSetCoverProblemǁbackTrack__mutmut_1(self, solution:Solution):
+        if solution.nSolutionSize > self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_2(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(None):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_3(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize <= self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_4(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(None)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_5(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(None):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_6(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(None, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_7(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, None) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_8(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_9(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, ) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_10(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) != False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_11(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == True):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_12(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(None, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_13(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, None)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_14(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_15(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, )
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_16(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth = 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_17(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth -= 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_18(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 2
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_19(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(None)
+                self.depth -= 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_20(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth = 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_21(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth += 1
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_22(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 2
+                self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_23(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(None, i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_24(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, None)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_25(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(i)
+
+    def xǁSetCoverProblemǁbackTrack__mutmut_26(self, solution:Solution):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if self.checkSolution(solution):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            if (self.containsSubSet(solution, i) == False):
+                self.addSubSet(solution, i)
+                self.depth += 1
+                self.backTrack(solution)
+                self.depth -= 1
+                self.removeSubSet(solution, )
+    
+    xǁSetCoverProblemǁbackTrack__mutmut_mutants : ClassVar[MutantDict] = {
+    'xǁSetCoverProblemǁbackTrack__mutmut_1': xǁSetCoverProblemǁbackTrack__mutmut_1, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_2': xǁSetCoverProblemǁbackTrack__mutmut_2, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_3': xǁSetCoverProblemǁbackTrack__mutmut_3, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_4': xǁSetCoverProblemǁbackTrack__mutmut_4, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_5': xǁSetCoverProblemǁbackTrack__mutmut_5, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_6': xǁSetCoverProblemǁbackTrack__mutmut_6, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_7': xǁSetCoverProblemǁbackTrack__mutmut_7, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_8': xǁSetCoverProblemǁbackTrack__mutmut_8, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_9': xǁSetCoverProblemǁbackTrack__mutmut_9, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_10': xǁSetCoverProblemǁbackTrack__mutmut_10, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_11': xǁSetCoverProblemǁbackTrack__mutmut_11, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_12': xǁSetCoverProblemǁbackTrack__mutmut_12, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_13': xǁSetCoverProblemǁbackTrack__mutmut_13, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_14': xǁSetCoverProblemǁbackTrack__mutmut_14, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_15': xǁSetCoverProblemǁbackTrack__mutmut_15, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_16': xǁSetCoverProblemǁbackTrack__mutmut_16, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_17': xǁSetCoverProblemǁbackTrack__mutmut_17, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_18': xǁSetCoverProblemǁbackTrack__mutmut_18, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_19': xǁSetCoverProblemǁbackTrack__mutmut_19, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_20': xǁSetCoverProblemǁbackTrack__mutmut_20, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_21': xǁSetCoverProblemǁbackTrack__mutmut_21, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_22': xǁSetCoverProblemǁbackTrack__mutmut_22, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_23': xǁSetCoverProblemǁbackTrack__mutmut_23, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_24': xǁSetCoverProblemǁbackTrack__mutmut_24, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_25': xǁSetCoverProblemǁbackTrack__mutmut_25, 
+        'xǁSetCoverProblemǁbackTrack__mutmut_26': xǁSetCoverProblemǁbackTrack__mutmut_26
+    }
+    
+    def backTrack(self, *args, **kwargs):
+        result = _mutmut_trampoline(object.__getattribute__(self, "xǁSetCoverProblemǁbackTrack__mutmut_orig"), object.__getattribute__(self, "xǁSetCoverProblemǁbackTrack__mutmut_mutants"), args, kwargs, self)
+        return result 
+    
+    backTrack.__signature__ = _mutmut_signature(xǁSetCoverProblemǁbackTrack__mutmut_orig)
+    xǁSetCoverProblemǁbackTrack__mutmut_orig.__name__ = 'xǁSetCoverProblemǁbackTrack'
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_orig(self, solution:Solution):
 
         if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
             return
@@ -2202,7 +2838,408 @@ class SetCoverProblem:
             self.depth -= 1
             self.removeSubSet(solution, i)
 
-    def backTrack3(self, solution:Solution, last:int): # pragma: no cover
+    def xǁSetCoverProblemǁbackTrack2__mutmut_1(self, solution:Solution):
+
+        if solution.nSolutionSize > self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_2(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(None)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_3(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize <= self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_4(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(None)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_5(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(None, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_6(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, None):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_7(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_8(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, ):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_9(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(None, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_10(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, None)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_11(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_12(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, )
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_13(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth = 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_14(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth -= 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_15(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 2
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_16(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(None)
+            self.depth -= 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_17(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth = 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_18(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth += 1
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_19(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 2
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_20(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(None, i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_21(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, None)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_22(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(i)
+
+    def xǁSetCoverProblemǁbackTrack2__mutmut_23(self, solution:Solution):
+
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+
+        for i in range(self.depth, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.depth += 1
+            self.backTrack2(solution)
+            self.depth -= 1
+            self.removeSubSet(solution, )
+    
+    xǁSetCoverProblemǁbackTrack2__mutmut_mutants : ClassVar[MutantDict] = {
+    'xǁSetCoverProblemǁbackTrack2__mutmut_1': xǁSetCoverProblemǁbackTrack2__mutmut_1, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_2': xǁSetCoverProblemǁbackTrack2__mutmut_2, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_3': xǁSetCoverProblemǁbackTrack2__mutmut_3, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_4': xǁSetCoverProblemǁbackTrack2__mutmut_4, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_5': xǁSetCoverProblemǁbackTrack2__mutmut_5, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_6': xǁSetCoverProblemǁbackTrack2__mutmut_6, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_7': xǁSetCoverProblemǁbackTrack2__mutmut_7, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_8': xǁSetCoverProblemǁbackTrack2__mutmut_8, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_9': xǁSetCoverProblemǁbackTrack2__mutmut_9, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_10': xǁSetCoverProblemǁbackTrack2__mutmut_10, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_11': xǁSetCoverProblemǁbackTrack2__mutmut_11, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_12': xǁSetCoverProblemǁbackTrack2__mutmut_12, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_13': xǁSetCoverProblemǁbackTrack2__mutmut_13, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_14': xǁSetCoverProblemǁbackTrack2__mutmut_14, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_15': xǁSetCoverProblemǁbackTrack2__mutmut_15, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_16': xǁSetCoverProblemǁbackTrack2__mutmut_16, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_17': xǁSetCoverProblemǁbackTrack2__mutmut_17, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_18': xǁSetCoverProblemǁbackTrack2__mutmut_18, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_19': xǁSetCoverProblemǁbackTrack2__mutmut_19, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_20': xǁSetCoverProblemǁbackTrack2__mutmut_20, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_21': xǁSetCoverProblemǁbackTrack2__mutmut_21, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_22': xǁSetCoverProblemǁbackTrack2__mutmut_22, 
+        'xǁSetCoverProblemǁbackTrack2__mutmut_23': xǁSetCoverProblemǁbackTrack2__mutmut_23
+    }
+    
+    def backTrack2(self, *args, **kwargs):
+        result = _mutmut_trampoline(object.__getattribute__(self, "xǁSetCoverProblemǁbackTrack2__mutmut_orig"), object.__getattribute__(self, "xǁSetCoverProblemǁbackTrack2__mutmut_mutants"), args, kwargs, self)
+        return result 
+    
+    backTrack2.__signature__ = _mutmut_signature(xǁSetCoverProblemǁbackTrack2__mutmut_orig)
+    xǁSetCoverProblemǁbackTrack2__mutmut_orig.__name__ = 'xǁSetCoverProblemǁbackTrack2'
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_orig(self, solution:Solution, last:int):
         if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
             return
         
@@ -2216,6 +3253,346 @@ class SetCoverProblem:
             self.backTrack3(solution, i + 1)
             self.removeSubSet(solution, i)
 
+    def xǁSetCoverProblemǁbackTrack3__mutmut_1(self, solution:Solution, last:int):
+        if solution.nSolutionSize > self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_2(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(None)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_3(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize <= self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_4(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(None)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_5(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(None, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_6(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, None):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_7(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_8(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, ):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_9(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(None, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_10(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, None)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_11(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_12(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, )
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_13(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(None, i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_14(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, None)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_15(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(i + 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_16(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, )
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_17(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i - 1)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_18(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 2)
+            self.removeSubSet(solution, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_19(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(None, i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_20(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, None)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_21(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(i)
+
+    def xǁSetCoverProblemǁbackTrack3__mutmut_22(self, solution:Solution, last:int):
+        if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
+            return
+        
+        if (self.checkSolution(solution)):
+            if solution.nSolutionSize < self.bestSolution.nSolutionSize:
+                self.copySolutionToBest(solution)
+            return
+        
+        for i in range(last, self.mainSet.nSubSets):
+            self.addSubSet(solution, i)
+            self.backTrack3(solution, i + 1)
+            self.removeSubSet(solution, )
+    
+    xǁSetCoverProblemǁbackTrack3__mutmut_mutants : ClassVar[MutantDict] = {
+    'xǁSetCoverProblemǁbackTrack3__mutmut_1': xǁSetCoverProblemǁbackTrack3__mutmut_1, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_2': xǁSetCoverProblemǁbackTrack3__mutmut_2, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_3': xǁSetCoverProblemǁbackTrack3__mutmut_3, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_4': xǁSetCoverProblemǁbackTrack3__mutmut_4, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_5': xǁSetCoverProblemǁbackTrack3__mutmut_5, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_6': xǁSetCoverProblemǁbackTrack3__mutmut_6, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_7': xǁSetCoverProblemǁbackTrack3__mutmut_7, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_8': xǁSetCoverProblemǁbackTrack3__mutmut_8, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_9': xǁSetCoverProblemǁbackTrack3__mutmut_9, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_10': xǁSetCoverProblemǁbackTrack3__mutmut_10, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_11': xǁSetCoverProblemǁbackTrack3__mutmut_11, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_12': xǁSetCoverProblemǁbackTrack3__mutmut_12, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_13': xǁSetCoverProblemǁbackTrack3__mutmut_13, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_14': xǁSetCoverProblemǁbackTrack3__mutmut_14, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_15': xǁSetCoverProblemǁbackTrack3__mutmut_15, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_16': xǁSetCoverProblemǁbackTrack3__mutmut_16, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_17': xǁSetCoverProblemǁbackTrack3__mutmut_17, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_18': xǁSetCoverProblemǁbackTrack3__mutmut_18, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_19': xǁSetCoverProblemǁbackTrack3__mutmut_19, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_20': xǁSetCoverProblemǁbackTrack3__mutmut_20, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_21': xǁSetCoverProblemǁbackTrack3__mutmut_21, 
+        'xǁSetCoverProblemǁbackTrack3__mutmut_22': xǁSetCoverProblemǁbackTrack3__mutmut_22
+    }
+    
+    def backTrack3(self, *args, **kwargs):
+        result = _mutmut_trampoline(object.__getattribute__(self, "xǁSetCoverProblemǁbackTrack3__mutmut_orig"), object.__getattribute__(self, "xǁSetCoverProblemǁbackTrack3__mutmut_mutants"), args, kwargs, self)
+        return result 
+    
+    backTrack3.__signature__ = _mutmut_signature(xǁSetCoverProblemǁbackTrack3__mutmut_orig)
+    xǁSetCoverProblemǁbackTrack3__mutmut_orig.__name__ = 'xǁSetCoverProblemǁbackTrack3'
+
     def xǁSetCoverProblemǁbackTrack4__mutmut_orig(self, solution:Solution, last:int, sum:int):
         if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
             return
@@ -2225,7 +3602,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2247,7 +3624,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2269,7 +3646,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2291,7 +3668,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2313,7 +3690,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(None)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2335,7 +3712,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(None, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2357,7 +3734,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, None):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2379,7 +3756,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2401,7 +3778,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, ):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2423,7 +3800,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum - self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2445,7 +3822,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1) + solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2467,7 +3844,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize + 1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2489,7 +3866,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-2)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2511,7 +3888,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] <= self.mainSet.nGlobalSetSize):
                 return
@@ -2533,7 +3910,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2555,7 +3932,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2577,7 +3954,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2599,7 +3976,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2621,7 +3998,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2643,7 +4020,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2665,7 +4042,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2687,7 +4064,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2709,7 +4086,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2731,7 +4108,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2753,7 +4130,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2775,7 +4152,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2797,7 +4174,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2819,7 +4196,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2841,7 +4218,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2863,7 +4240,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2885,7 +4262,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2907,7 +4284,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2929,7 +4306,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -2951,7 +4328,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -3265,7 +4642,7 @@ class SetCoverProblem:
     xǁSetCoverProblemǁremoveSubSet__mutmut_orig.__name__ = 'xǁSetCoverProblemǁremoveSubSet'
 
     def xǁSetCoverProblemǁcontainsSubSet__mutmut_orig(self, solution:Solution, subSetIndex:int) -> bool:
-        for i in range(solution.nSolutionSize):
+        for i in range(len(solution.subSets)):
             if solution.subSets[i] == subSetIndex:
                 return True
             
@@ -3279,21 +4656,21 @@ class SetCoverProblem:
         return False
 
     def xǁSetCoverProblemǁcontainsSubSet__mutmut_2(self, solution:Solution, subSetIndex:int) -> bool:
-        for i in range(solution.nSolutionSize):
+        for i in range(len(solution.subSets)):
             if solution.subSets[i] != subSetIndex:
                 return True
             
         return False
 
     def xǁSetCoverProblemǁcontainsSubSet__mutmut_3(self, solution:Solution, subSetIndex:int) -> bool:
-        for i in range(solution.nSolutionSize):
+        for i in range(len(solution.subSets)):
             if solution.subSets[i] == subSetIndex:
                 return False
             
         return False
 
     def xǁSetCoverProblemǁcontainsSubSet__mutmut_4(self, solution:Solution, subSetIndex:int) -> bool:
-        for i in range(solution.nSolutionSize):
+        for i in range(len(solution.subSets)):
             if solution.subSets[i] == subSetIndex:
                 return True
             
@@ -3402,38 +4779,167 @@ class SetCoverProblem:
     checkSolution.__signature__ = _mutmut_signature(xǁSetCoverProblemǁcheckSolution__mutmut_orig)
     xǁSetCoverProblemǁcheckSolution__mutmut_orig.__name__ = 'xǁSetCoverProblemǁcheckSolution'
 
-    def printSolution(self, solution:Solution): # pragma: no cover
+    def xǁSetCoverProblemǁprintSolution__mutmut_orig(self, solution:Solution): # pragma: no cover
         print(solution.nSolutionSize)
         for i in range(solution.nSolutionSize):
             print(self.mainSet.originalOrder[solution.subSets[i]])
             self.printSubSet(solution.subSets[i])
 
-    def echoInit(self): # pragma: no cover
+    def xǁSetCoverProblemǁprintSolution__mutmut_1(self, solution:Solution): # pragma: no cover
+        print(None)
+        for i in range(solution.nSolutionSize):
+            print(self.mainSet.originalOrder[solution.subSets[i]])
+            self.printSubSet(solution.subSets[i])
+
+    def xǁSetCoverProblemǁprintSolution__mutmut_2(self, solution:Solution): # pragma: no cover
+        print(solution.nSolutionSize)
+        for i in range(None):
+            print(self.mainSet.originalOrder[solution.subSets[i]])
+            self.printSubSet(solution.subSets[i])
+
+    def xǁSetCoverProblemǁprintSolution__mutmut_3(self, solution:Solution): # pragma: no cover
+        print(solution.nSolutionSize)
+        for i in range(solution.nSolutionSize):
+            print(None)
+            self.printSubSet(solution.subSets[i])
+
+    def xǁSetCoverProblemǁprintSolution__mutmut_4(self, solution:Solution): # pragma: no cover
+        print(solution.nSolutionSize)
+        for i in range(solution.nSolutionSize):
+            print(self.mainSet.originalOrder[solution.subSets[i]])
+            self.printSubSet(None)
+    
+    xǁSetCoverProblemǁprintSolution__mutmut_mutants : ClassVar[MutantDict] = {
+    'xǁSetCoverProblemǁprintSolution__mutmut_1': xǁSetCoverProblemǁprintSolution__mutmut_1, 
+        'xǁSetCoverProblemǁprintSolution__mutmut_2': xǁSetCoverProblemǁprintSolution__mutmut_2, 
+        'xǁSetCoverProblemǁprintSolution__mutmut_3': xǁSetCoverProblemǁprintSolution__mutmut_3, 
+        'xǁSetCoverProblemǁprintSolution__mutmut_4': xǁSetCoverProblemǁprintSolution__mutmut_4
+    }
+    
+    def printSolution(self, *args, **kwargs):
+        result = _mutmut_trampoline(object.__getattribute__(self, "xǁSetCoverProblemǁprintSolution__mutmut_orig"), object.__getattribute__(self, "xǁSetCoverProblemǁprintSolution__mutmut_mutants"), args, kwargs, self)
+        return result 
+    
+    printSolution.__signature__ = _mutmut_signature(xǁSetCoverProblemǁprintSolution__mutmut_orig)
+    xǁSetCoverProblemǁprintSolution__mutmut_orig.__name__ = 'xǁSetCoverProblemǁprintSolution'
+
+    def xǁSetCoverProblemǁechoInit__mutmut_orig(self): # pragma: no cover
         print(f"Universal Set 1-{self.mainSet.nGlobalSetSize}\n")
         print(f"Number of subsets {self.mainSet.nSubSets}\n")
         for i in range(self.mainSet.nSubSets):
             self.printSubSet(i)
 
-    def printSubSet(self, nSubSetIndex:int): # pragma: no cover
+    def xǁSetCoverProblemǁechoInit__mutmut_1(self): # pragma: no cover
+        print(None)
+        print(f"Number of subsets {self.mainSet.nSubSets}\n")
+        for i in range(self.mainSet.nSubSets):
+            self.printSubSet(i)
+
+    def xǁSetCoverProblemǁechoInit__mutmut_2(self): # pragma: no cover
+        print(f"Universal Set 1-{self.mainSet.nGlobalSetSize}\n")
+        print(None)
+        for i in range(self.mainSet.nSubSets):
+            self.printSubSet(i)
+
+    def xǁSetCoverProblemǁechoInit__mutmut_3(self): # pragma: no cover
+        print(f"Universal Set 1-{self.mainSet.nGlobalSetSize}\n")
+        print(f"Number of subsets {self.mainSet.nSubSets}\n")
+        for i in range(None):
+            self.printSubSet(i)
+
+    def xǁSetCoverProblemǁechoInit__mutmut_4(self): # pragma: no cover
+        print(f"Universal Set 1-{self.mainSet.nGlobalSetSize}\n")
+        print(f"Number of subsets {self.mainSet.nSubSets}\n")
+        for i in range(self.mainSet.nSubSets):
+            self.printSubSet(None)
+    
+    xǁSetCoverProblemǁechoInit__mutmut_mutants : ClassVar[MutantDict] = {
+    'xǁSetCoverProblemǁechoInit__mutmut_1': xǁSetCoverProblemǁechoInit__mutmut_1, 
+        'xǁSetCoverProblemǁechoInit__mutmut_2': xǁSetCoverProblemǁechoInit__mutmut_2, 
+        'xǁSetCoverProblemǁechoInit__mutmut_3': xǁSetCoverProblemǁechoInit__mutmut_3, 
+        'xǁSetCoverProblemǁechoInit__mutmut_4': xǁSetCoverProblemǁechoInit__mutmut_4
+    }
+    
+    def echoInit(self, *args, **kwargs):
+        result = _mutmut_trampoline(object.__getattribute__(self, "xǁSetCoverProblemǁechoInit__mutmut_orig"), object.__getattribute__(self, "xǁSetCoverProblemǁechoInit__mutmut_mutants"), args, kwargs, self)
+        return result 
+    
+    echoInit.__signature__ = _mutmut_signature(xǁSetCoverProblemǁechoInit__mutmut_orig)
+    xǁSetCoverProblemǁechoInit__mutmut_orig.__name__ = 'xǁSetCoverProblemǁechoInit'
+
+    def xǁSetCoverProblemǁprintSubSet__mutmut_orig(self, nSubSetIndex:int): # pragma: no cover
         for i in range(self.mainSet.nSubSetSizes[nSubSetIndex]):
             print(self.mainSet.subsets[nSubSetIndex][i])
         print("\n")
 
-def inthandler(signum, frame, setCover:SetCoverProblem): # pragma: no cover
+    def xǁSetCoverProblemǁprintSubSet__mutmut_1(self, nSubSetIndex:int): # pragma: no cover
+        for i in range(None):
+            print(self.mainSet.subsets[nSubSetIndex][i])
+        print("\n")
+
+    def xǁSetCoverProblemǁprintSubSet__mutmut_2(self, nSubSetIndex:int): # pragma: no cover
+        for i in range(self.mainSet.nSubSetSizes[nSubSetIndex]):
+            print(None)
+        print("\n")
+
+    def xǁSetCoverProblemǁprintSubSet__mutmut_3(self, nSubSetIndex:int): # pragma: no cover
+        for i in range(self.mainSet.nSubSetSizes[nSubSetIndex]):
+            print(self.mainSet.subsets[nSubSetIndex][i])
+        print(None)
+
+    def xǁSetCoverProblemǁprintSubSet__mutmut_4(self, nSubSetIndex:int): # pragma: no cover
+        for i in range(self.mainSet.nSubSetSizes[nSubSetIndex]):
+            print(self.mainSet.subsets[nSubSetIndex][i])
+        print("XX\nXX")
+    
+    xǁSetCoverProblemǁprintSubSet__mutmut_mutants : ClassVar[MutantDict] = {
+    'xǁSetCoverProblemǁprintSubSet__mutmut_1': xǁSetCoverProblemǁprintSubSet__mutmut_1, 
+        'xǁSetCoverProblemǁprintSubSet__mutmut_2': xǁSetCoverProblemǁprintSubSet__mutmut_2, 
+        'xǁSetCoverProblemǁprintSubSet__mutmut_3': xǁSetCoverProblemǁprintSubSet__mutmut_3, 
+        'xǁSetCoverProblemǁprintSubSet__mutmut_4': xǁSetCoverProblemǁprintSubSet__mutmut_4
+    }
+    
+    def printSubSet(self, *args, **kwargs):
+        result = _mutmut_trampoline(object.__getattribute__(self, "xǁSetCoverProblemǁprintSubSet__mutmut_orig"), object.__getattribute__(self, "xǁSetCoverProblemǁprintSubSet__mutmut_mutants"), args, kwargs, self)
+        return result 
+    
+    printSubSet.__signature__ = _mutmut_signature(xǁSetCoverProblemǁprintSubSet__mutmut_orig)
+    xǁSetCoverProblemǁprintSubSet__mutmut_orig.__name__ = 'xǁSetCoverProblemǁprintSubSet'
+
+def x_inthandler__mutmut_orig(signum, frame, setCover:SetCoverProblem): # pragma: no cover
         setCover.printSolution(setCover.bestSolution)
         exit(0)
 
+def x_inthandler__mutmut_1(signum, frame, setCover:SetCoverProblem): # pragma: no cover
+        setCover.printSolution(None)
+        exit(0)
+
+def x_inthandler__mutmut_2(signum, frame, setCover:SetCoverProblem): # pragma: no cover
+        setCover.printSolution(setCover.bestSolution)
+        exit(None)
+
+def x_inthandler__mutmut_3(signum, frame, setCover:SetCoverProblem): # pragma: no cover
+        setCover.printSolution(setCover.bestSolution)
+        exit(1)
+
+x_inthandler__mutmut_mutants : ClassVar[MutantDict] = {
+'x_inthandler__mutmut_1': x_inthandler__mutmut_1, 
+    'x_inthandler__mutmut_2': x_inthandler__mutmut_2, 
+    'x_inthandler__mutmut_3': x_inthandler__mutmut_3
+}
+
+def inthandler(*args, **kwargs):
+    result = _mutmut_trampoline(x_inthandler__mutmut_orig, x_inthandler__mutmut_mutants, args, kwargs)
+    return result 
+
+inthandler.__signature__ = _mutmut_signature(x_inthandler__mutmut_orig)
+x_inthandler__mutmut_orig.__name__ = 'x_inthandler'
+
 if __name__ == "__main__": # pragma: no cover
 
-    cwd = os.getcwd()
-
-    if cwd.endswith("ATCG"):
-        os.chdir("CaseStudies/Set_Problem_Solver")
-    elif cwd.endswith("Studies"):
-        os.chdir("Set_Problem_Solver")
+    cwd = Path.cwd()
     
-    cwd = os.getcwd()
-    print(cwd)
+    cwd = cwd
 
     filename = input("Enter your filename: ")
 
@@ -3446,7 +4952,7 @@ if __name__ == "__main__": # pragma: no cover
     mainSet = Set()
     try:
         lineno = 0
-        with open("../tests/test_cases/"+filename+".txt", 'r') as gameFile:
+        with open(cwd/f"tests/test_cases/{filename}.txt", 'r') as gameFile:
             line = gameFile.readline()
             while line != "":
                 if lineno == 0:
@@ -3483,7 +4989,7 @@ if __name__ == "__main__": # pragma: no cover
 
     setCover.greedy()
     setCover.backTrack4(setCover.aSolution, 0, 0)
-
+    
     setCover.printSolution(setCover.bestSolution)
     print("\n")
     

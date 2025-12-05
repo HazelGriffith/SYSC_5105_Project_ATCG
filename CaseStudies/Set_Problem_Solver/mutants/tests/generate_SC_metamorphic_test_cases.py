@@ -1,4 +1,5 @@
 from source.setCover import SetCoverProblem, Solution, Set
+from pathlib import Path
 import random, os, signal, shutil
 
 
@@ -11,7 +12,9 @@ def setup_problem(filename:str) -> Set:
     mainSet = Set()
     try:
         lineno = 0
-        with open("tests/"+filename+".txt", 'r') as gameFile:
+        cwd = Path.cwd()
+        filePath = cwd/f"tests/test_cases/"
+        with open(filePath/f"{filename}.txt", 'r') as gameFile:
             line = gameFile.readline()
             while line != "":
                 if lineno == 0:
@@ -43,8 +46,10 @@ def setup_problem(filename:str) -> Set:
     return mainSet
 
 def save(filename:str, newSet:Set):
+    cwd = Path.cwd()
+    filePath = cwd/f"tests/test_cases/"
     try:
-        with open(f"tests/{filename}.txt", "x") as newFile:
+        with open(filePath/f"{filename}.txt", "x") as newFile:
             newFile.write(str(newSet.nGlobalSetSize)+"\n")
             newFile.write(str(newSet.nSubSets)+"\n")
             for setNum in newSet.originalOrder:
@@ -55,7 +60,7 @@ def save(filename:str, newSet:Set):
                     else:
                         newFile.write(" ")
     except Exception as e:
-        os.remove(f"tests/{filename}.txt")
+        os.remove(filePath/f"{filename}.txt")
         save(filename,newSet)
 
 '''
@@ -107,7 +112,7 @@ def new_added_redundant_sets_transformations(filename:str, mainSet:Set, i:int, n
             if subSet1.count(num) == 0:
                 subSet1.append(num)
 
-        newSet.originalOrder.append(len(newSet.subsets))
+        newSet.originalOrder.append(len(newSet.subsets)+1)
         newSet.subsets.append(subSet1)   
 
     newSet.nSubSets += numOfNewSets
@@ -216,28 +221,25 @@ def run_tests(filename:str, num_of_tests_to_generate:int, num_of_redundant_subse
 
 
 def main():
-    num_of_tests_to_generate = 2
-    num_of_redundant_subsets = 3
+    num_of_tests_to_generate = 5
+    num_of_redundant_subsets = 1
 
     #First, we take all problem files in the "tests_used" folder and prepare directories to contain
     #all of the transformed auto generated test problem files
-    cwd = os.getcwd()
-    if cwd.endswith("ATCG"):
-        os.chdir("CaseStudies/Set_Problem_Solver")
-    elif cwd.endswith("Studies"):
-        os.chdir("Set_Problem_Solver")
+    cwd = Path.cwd()
 
     generate = input("Generate new tests? (y/n): ")
 
-    testEntries = os.listdir("tests/tests_used/")
+    testFilePath = cwd/"tests/test_cases/"
+    testEntries = os.listdir(testFilePath/"tests_used")
 
     if (generate.casefold() == "y"):
         for pos, entry in enumerate(testEntries):
             foldername = entry.replace(".txt","")
-            if os.path.exists(os.path.join(cwd,f"tests/transformed_problem_files/{foldername}_transformations")):
-                shutil.rmtree(f"tests/transformed_problem_files/{foldername}_transformations")
-            os.makedirs(f"tests/transformed_problem_files/{foldername}_transformations/relabeling/", exist_ok=True)
-            os.makedirs(f"tests/transformed_problem_files/{foldername}_transformations/add_redundant_sets/", exist_ok=True)
+            if os.path.exists(testFilePath/f"transformed_problem_files/{foldername}_transformations"):
+                shutil.rmtree(testFilePath/f"transformed_problem_files/{foldername}_transformations")
+            os.makedirs(testFilePath/f"transformed_problem_files/{foldername}_transformations/relabeling/", exist_ok=True)
+            os.makedirs(testFilePath/f"transformed_problem_files/{foldername}_transformations/add_redundant_sets/", exist_ok=True)
     
     #here we generate the transformations of each problem file
     for entry in testEntries:

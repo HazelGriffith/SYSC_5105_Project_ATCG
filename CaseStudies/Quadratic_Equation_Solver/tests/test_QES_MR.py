@@ -40,18 +40,28 @@ def load_tests(filename:str):
             b = int(coeffs[1].replace("b = ",""))
             c = int(coeffs[2].replace("c = ",""))
 
-            if filename == "disc_tests" or filename == "eval_tests" or filename == "vieta_mult_tests":
-                k = int(coeffs[3].replace("k = ",""))
-                gen_prob = Quadratic_Equation_Problem(a,b,c,k)
-                seed_prob = Quadratic_Equation_Problem(a,b,c,None)
-            elif filename == "vieta_invert_tests":
-                gen_prob = Quadratic_Equation_Problem(a,b,c,None)
-                seed_prob = Quadratic_Equation_Problem(c,b,a,None)
-            elif filename == "vieta_negate_tests":
-                gen_prob = Quadratic_Equation_Problem(a,b,c,None)
-                seed_prob = Quadratic_Equation_Problem(-1*a,-1*b,-1*c,None)
+            try:
+                validateInput(str(a))
+                validateInput(str(b))
+                validateInput(str(c))
+
+                if filename == "disc_tests" or filename == "eval_tests" or filename == "vieta_mult_tests":
+                    k = int(coeffs[3].replace("k = ",""))
+                    validateInput(str(k))
+                    gen_prob = Quadratic_Equation_Problem(a,b,c,k)
+                    seed_prob = Quadratic_Equation_Problem(a,b,c,None)
+                elif filename == "vieta_invert_tests":
+                    gen_prob = Quadratic_Equation_Problem(a,b,c,None)
+                    seed_prob = Quadratic_Equation_Problem(c,b,a,None)
+                elif filename == "vieta_negate_tests":
+                    gen_prob = Quadratic_Equation_Problem(a,b,c,None)
+                    seed_prob = Quadratic_Equation_Problem(-1*a,-1*b,-1*c,None)
+                
+                tests.update({f"Trial {filename} {lineNo}" : {"seed_prob" : seed_prob, "gen_prob" : gen_prob}})
             
-            tests.update({f"Trial {filename} {lineNo}" : {"seed_prob" : seed_prob, "gen_prob" : gen_prob}})
+            except NotEnoughPrecisionException as e:
+                print(e)
+
             line = tests_file.readline()
             lineNo += 1
     return tests

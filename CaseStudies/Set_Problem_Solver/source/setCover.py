@@ -1,7 +1,8 @@
 import signal
 import os
+from pathlib import Path
 
-class Set: # pragma: no cover
+class Set:
 
     def __init__(self, nGlobalSetSize:int = 0, nSubSets:int = 0, originalOrder:list[int] = None, nSubSetSizes:list[int] = None, subsets:list[list[int]] = None, subSetsSizesSum:list[list[int]] = None):
         self.nGlobalSetSize = nGlobalSetSize
@@ -26,7 +27,7 @@ class Set: # pragma: no cover
         else:
             self.subSetSizesSum = subSetsSizesSum
 
-    def copy(self): # pragma: no cover
+    def copy(self):
         newSet = Set()
         newSet.nGlobalSetSize = self.nGlobalSetSize
         newSet.nSubSets = self.nSubSets
@@ -113,12 +114,12 @@ class SetCoverProblem:
 
     def copySolutionToBest(self, solution:Solution):
         self.bestSolution.nSolutionSize = solution.nSolutionSize
-        for i in range(solution.nSolutionSize):
+        for i in range(len(solution.subSets)):
             self.bestSolution.subSets[i] = solution.subSets[i]
         for i in range(self.mainSet.nGlobalSetSize):
             self.bestSolution.boolIncluded[i] = solution.boolIncluded[i]
 
-    def backTrack(self, solution:Solution): # pragma: no cover
+    def backTrack(self, solution:Solution):
         if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
             return
         
@@ -134,7 +135,7 @@ class SetCoverProblem:
                 self.depth -= 1
                 self.removeSubSet(solution, i)
 
-    def backTrack2(self, solution:Solution): # pragma: no cover
+    def backTrack2(self, solution:Solution):
 
         if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
             return
@@ -150,7 +151,7 @@ class SetCoverProblem:
             self.depth -= 1
             self.removeSubSet(solution, i)
 
-    def backTrack3(self, solution:Solution, last:int): # pragma: no cover
+    def backTrack3(self, solution:Solution, last:int):
         if solution.nSolutionSize >= self.bestSolution.nSolutionSize:
             return
         
@@ -173,7 +174,7 @@ class SetCoverProblem:
                 self.copySolutionToBest(solution)
 
             return
-        
+
         for i in range(last, self.mainSet.nSubSets):
             if (sum + self.mainSet.subSetSizesSum[i][(self.bestSolution.nSolutionSize-1)-solution.nSolutionSize] < self.mainSet.nGlobalSetSize):
                 return
@@ -202,7 +203,7 @@ class SetCoverProblem:
             solution.boolIncluded[self.mainSet.subsets[subSetIndex][i] - 1] -= 1
 
     def containsSubSet(self, solution:Solution, subSetIndex:int) -> bool:
-        for i in range(solution.nSolutionSize):
+        for i in range(len(solution.subSets)):
             if solution.subSets[i] == subSetIndex:
                 return True
             
@@ -240,15 +241,9 @@ def inthandler(signum, frame, setCover:SetCoverProblem): # pragma: no cover
 
 if __name__ == "__main__": # pragma: no cover
 
-    cwd = os.getcwd()
-
-    if cwd.endswith("ATCG"):
-        os.chdir("CaseStudies/Set_Problem_Solver")
-    elif cwd.endswith("Studies"):
-        os.chdir("Set_Problem_Solver")
+    cwd = Path.cwd()
     
-    cwd = os.getcwd()
-    print(cwd)
+    cwd = cwd
 
     filename = input("Enter your filename: ")
 
@@ -261,7 +256,7 @@ if __name__ == "__main__": # pragma: no cover
     mainSet = Set()
     try:
         lineno = 0
-        with open("../tests/test_cases/"+filename+".txt", 'r') as gameFile:
+        with open(cwd/f"tests/test_cases/{filename}.txt", 'r') as gameFile:
             line = gameFile.readline()
             while line != "":
                 if lineno == 0:
@@ -298,7 +293,7 @@ if __name__ == "__main__": # pragma: no cover
 
     setCover.greedy()
     setCover.backTrack4(setCover.aSolution, 0, 0)
-
+    
     setCover.printSolution(setCover.bestSolution)
     print("\n")
     
