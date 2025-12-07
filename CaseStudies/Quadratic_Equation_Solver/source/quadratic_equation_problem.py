@@ -1,3 +1,6 @@
+'''
+This class stores the coefficients of a quadratic equation and multiplies them by some value K if given in the arguments
+'''
 class Quadratic_Equation_Problem: # pragma: no cover
      
     def __init__(self, a, b, c, k = None):

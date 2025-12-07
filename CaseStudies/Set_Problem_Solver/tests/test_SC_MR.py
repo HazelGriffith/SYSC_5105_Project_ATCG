@@ -50,9 +50,18 @@ def setup_problem(filename:str) -> Set:
 
     return mainSet
 
+'''
+Raises a 'timed out' exception when an alarm rings from the signal class
+'''
 def time_out_handler(signum, frame):
     raise Exception("Timed out")
 
+'''
+Solves the given minimal set cover problem using the given back track algorithm version
+Returns the solution object and a boolean that is true if it timed out, and false otherwise
+args: mainSet = Set, backTrackVersion = int
+returns: solution, timedOut = bool
+'''
 def solve_problem(mainSet:Set, backTrackVersion:int):
     aSolution = Solution(mainSet)
     bestSolution = Solution(mainSet, mainSet.nSubSets-1)
@@ -84,6 +93,10 @@ def solve_problem(mainSet:Set, backTrackVersion:int):
     setCover = None
     return ResultingSolution, timedOut
 
+'''
+This section loads the dictionaries of tests for PyTest
+Covering test dictionaries for every metamorphic relation used
+'''
 cwd = Path.cwd()
 print(cwd)
 testEntries = os.listdir(cwd/"tests/test_cases/tests_used/")
@@ -91,6 +104,7 @@ testEntries = os.listdir(cwd/"tests/test_cases/tests_used/")
 for entry in testEntries:
     filename = entry.replace(".txt","")
     mainSet = setup_problem(f"tests_used/{filename}")
+    #seed solutions given each back track version are found ahead of time to improve execution times
     seed_solution_1, seed_timedOut_1 = solve_problem(mainSet,1)
     seed_solution_2, seed_timedOut_2 = solve_problem(mainSet,2)
     seed_solution_3, seed_timedOut_3 = solve_problem(mainSet,3)
@@ -122,7 +136,10 @@ for entry in testEntries:
                                                                                       "seed_solution_4" : seed_solution_4, "seed_timedOut_4" : seed_timedOut_4,  
                                                                                       "gen_prob_filename" : add_redundant_sets_problem_folder + prob.replace(".txt",""), "seed_prob_filename" : filename}})
 
-
+'''
+This PyTest function collects all of the tests stored in the different metamorphic relations 
+dictionary and parametrizes each test for each entry of the dictionary for its associated test
+'''
 def pytest_generate_tests(metafunc):
 
     if "get_add_one_element" in metafunc.fixturenames:
@@ -143,6 +160,13 @@ def pytest_generate_tests(metafunc):
 
         metafunc.parametrize("get_add_redundant_sets", test_values, ids=test_ids)
 
+'''
+These PyTest test functions pass if the metamorphic relation holds on both the seed test
+solution and the generated test solution 
+They also vary by which back track version is being used
+Ex: add_one_element_v1 is testing the add one new element in a new subset of size one metamorphic relation
+    by solving it with the first version of the back track algorithm
+'''
 def test_add_one_element_v1(get_add_one_element):
     transformed_problem_file = get_add_one_element["gen_prob_filename"]
     original_problem_file = get_add_one_element["seed_prob_filename"]
@@ -154,13 +178,16 @@ def test_add_one_element_v1(get_add_one_element):
     gen_solution, gen_timedOut = solve_problem(setup_problem(transformed_problem_file), 1)
     gen_solution_size = gen_solution.nSolutionSize
 
+    #If either timedout we relax the assertion to say the seed solution size + 1 should be equal to or smaller than the generated solution 
     if (seed_timedOut or gen_timedOut):
         assert(gen_solution_size >= seed_solution_size+1), f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, timed out, in {original_problem_file}, add_one_element"
     else:
+    #Otherwise the genereated solution size should exactly equal the seed solution size + 1
         assert(gen_solution_size == seed_solution_size+1), f"gen_solution_size = {gen_solution_size}, and seed_solution_size = {seed_solution_size}, in {original_problem_file}, add_one_element"
     
     seed_solution = get_add_one_element["seed_solution_1"]
     solutions = [seed_solution, gen_solution]
+    #Check properties of a valid solution are true for both seed and generated solutions
     for solution in solutions:
         toRemove = []
         for i in solution.subSets:
@@ -168,11 +195,13 @@ def test_add_one_element_v1(get_add_one_element):
                 toRemove.append(i)
         for j in toRemove:
             solution.subSets.remove(j)
+        #The solution list of subsets should be as big as it's solution size
         assert (len(solution.subSets) == solution.nSolutionSize), f"solution subsets: {solution.subSets}"
         count = 0
         for i in solution.boolIncluded:
             if i == 1:
                 count += 1
+        #At least one entry in the boolIncluded list must be 1
         assert (count >= 1), "BoolIncluded is not incrementing by ones"
 
 

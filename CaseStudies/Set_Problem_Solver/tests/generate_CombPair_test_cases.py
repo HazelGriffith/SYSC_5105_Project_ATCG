@@ -61,6 +61,13 @@ CONSTRAINTS:
     0 < m < 30 (same as above)
     0 < size of any subset < n
 '''
+
+'''
+Given the global set size n, the number of subsets m, the size of subsets in the first and second halves, it creates a valid problem test-case
+with the given filename and returns it
+args: filename = str, n = int, m = int, firstHalfSizes = int, secondHalfSizes = int
+returns SetCoverTestCase
+'''
 def generate_test_case(filename:str, n:int, m:int, firstHalfSizes:int, secondHalfSizes:int) ->SetCoverTestCase:
     try:
 
@@ -98,7 +105,11 @@ def generate_test_case(filename:str, n:int, m:int, firstHalfSizes:int, secondHal
         print(f"the generated problem cannot be solved")
         return None
 
-
+'''
+Returns random values for the first parameter (relation between global set size and the number of subsets) according to what category is needed
+args: max_value = int, category = int
+returns (n_global = int, n_subsets = int)
+'''
 def setup_param_1(max_value:int, category:int):
     if category == 1:
         # n < m
@@ -114,6 +125,11 @@ def setup_param_1(max_value:int, category:int):
         n_subsets = random.randint(2, n_global-1) # n_global < n_subsets < max_value
     return n_global, n_subsets
 
+'''
+Returns a random value for the second parameter (subset sizes distribution trend) according to what category is needed
+args: max_value = int, category = int
+returns (first half subset size = int, second half subset size = int)
+'''
 def setup_param_2(n_global:int, category:int):
     big_subset_size = random.randint(int(n_global*(2/3)),n_global) # 2*n_global/3 < big_subset_size < n_global
     if (n_global >= 6):
@@ -133,7 +149,9 @@ def setup_param_2(n_global:int, category:int):
         # t = uniform big
         return big_subset_size, big_subset_size
 '''
-
+Given the maximum value for the global set size and the number of tests to generate per test frame, it randomly generates and returns a list of valid problem sets 
+args: max_value = int, num_tests_per_frame = int
+returns: tests = list[SetCoverTestCase]
 '''
 def generate_test_cases(max_value:int, num_tests_per_frame:int):
     tests = []
@@ -162,6 +180,7 @@ def write_test_cases_as_files(output_dir: Path, tests) -> List[Path]:
     return paths
 
 if __name__ == "__main__":
+    #max of 15 is used to prevent timeout
     tests = generate_test_cases(15,3)
     cwd = Path.cwd()
     comb_pair_tests_dir = cwd / f"tests/test_cases/comb_pair_tests/"

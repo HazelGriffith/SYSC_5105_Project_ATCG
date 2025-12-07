@@ -45,9 +45,18 @@ def setup_problem(filename:str) -> Set:
 
     return mainSet
 
+'''
+Raises a 'timed out' exception when an alarm rings from the signal class
+'''
 def time_out_handler(signum, frame):
     raise Exception("Timed out")
 
+'''
+Solves the given minimal set cover problem using the given back track algorithm version
+Returns the solution object and a boolean that is true if it timed out, and false otherwise
+args: mainSet = Set, backTrackVersion = int
+returns: solution, timedOut = bool
+'''
 def solve_problem(mainSet:Set, backTrackVersion:int):
     aSolution = Solution(mainSet)
     bestSolution = Solution(mainSet, mainSet.nSubSets-1)
@@ -80,6 +89,9 @@ def solve_problem(mainSet:Set, backTrackVersion:int):
     setCover = None
     return ResultingSolution, timedOut
 
+'''
+This section loads the dictionary of tests for PyTest along with the correct answers for each test
+'''
 cwd = Path.cwd()
 testEntries = os.listdir(cwd / "tests/test_cases/comb_pair_tests/")
 
@@ -94,6 +106,9 @@ for entry in testEntries:
             line = answerFile.readline()
     tests.update({filename : {"set" : mainSet, "answer" : answer_list}})
 
+'''
+This PyTest function collects all of the tests stored in the tests dictionary and parametrizes each test for each entry of the dictionary
+'''
 def pytest_generate_tests(metafunc):
 
     if "get_tests" in metafunc.fixturenames:
@@ -102,10 +117,15 @@ def pytest_generate_tests(metafunc):
 
         metafunc.parametrize("get_tests", test_values, ids=test_ids)
 
+'''
+These functions run the source code with each back track version on the given test-case and compare the solution received with the correct solution
+args: get_tests tells PyTest to pass the parametrized tests dictionary 
+'''
 def test_set_cover_solver_v1(get_tests):
     mainSet = get_tests["set"]
     answer = get_tests["answer"]
     solution, timedout = solve_problem(mainSet.copy(), 1)
+    #checks if the solution size matches the correct solution size
     assert (solution.nSolutionSize == len(answer)), f"solution subsets: {solution.subSets}"
     toRemove = []
     for i in solution.subSets:
@@ -113,17 +133,21 @@ def test_set_cover_solver_v1(get_tests):
             toRemove.append(i)
     for j in toRemove:
         solution.subSets.remove(j)
+    #checks if the solution's list of subsets has the same size as the correct answer
     assert (len(solution.subSets) == len(answer)), f"solution subsets: {solution.subSets}"
     count = 0
     for i in range(len(solution.boolIncluded)):
         if i == 1:
             count += 1
+    #Checks that at least one entry in Boolincluded is equal to 1
+    #otherwise it is not incrementing by or it is not the optimal solution
     assert (count >= 1), "BoolIncluded is not incrementing by ones"
 
 def test_set_cover_solver_v2(get_tests):
     mainSet = get_tests["set"]
     answer = get_tests["answer"]
     solution, timedout = solve_problem(mainSet.copy(), 2)
+    #checks if the solution size matches the correct solution size
     assert (solution.nSolutionSize == len(answer)), f"solution subsets: {solution.subSets}"
     toRemove = []
     for i in solution.subSets:
@@ -131,17 +155,21 @@ def test_set_cover_solver_v2(get_tests):
             toRemove.append(i)
     for j in toRemove:
         solution.subSets.remove(j)
+    #checks if the solution's list of subsets has the same size as the correct answer
     assert (len(solution.subSets) == len(answer)), f"solution subsets: {solution.subSets}"
     count = 0
     for i in range(len(solution.boolIncluded)):
         if i == 1:
             count += 1
+    #Checks that at least one entry in Boolincluded is equal to 1
+    #otherwise it is not incrementing by or it is not the optimal solution
     assert (count >= 1), "BoolIncluded is not incrementing by ones"
 
 def test_set_cover_solver_v3(get_tests):
     mainSet = get_tests["set"]
     answer = get_tests["answer"]
     solution, timedout = solve_problem(mainSet.copy(), 3)
+    #checks if the solution size matches the correct solution size
     assert (solution.nSolutionSize == len(answer)), f"solution subsets: {solution.subSets}"
     toRemove = []
     for i in solution.subSets:
@@ -149,17 +177,21 @@ def test_set_cover_solver_v3(get_tests):
             toRemove.append(i)
     for j in toRemove:
         solution.subSets.remove(j)
+    #checks if the solution's list of subsets has the same size as the correct answer
     assert (len(solution.subSets) == len(answer)), f"solution subsets: {solution.subSets}"
     count = 0
     for i in range(len(solution.boolIncluded)):
         if i == 1:
             count += 1
+    #Checks that at least one entry in Boolincluded is equal to 1
+    #otherwise it is not incrementing by or it is not the optimal solution
     assert (count >= 1), "BoolIncluded is not incrementing by ones"
     
 def test_set_cover_solver_v4(get_tests):
     mainSet = get_tests["set"]
     answer = get_tests["answer"]
     solution, timedout = solve_problem(mainSet.copy(), 4)
+    #checks if the solution size matches the correct solution size
     assert (solution.nSolutionSize == len(answer)), f"solution subsets: {solution.subSets}"
     toRemove = []
     for i in solution.subSets:
@@ -167,9 +199,12 @@ def test_set_cover_solver_v4(get_tests):
             toRemove.append(i)
     for j in toRemove:
         solution.subSets.remove(j)
+    #checks if the solution's list of subsets has the same size as the correct answer
     assert (len(solution.subSets) == len(answer)), f"solution subsets: {solution.subSets}"
     count = 0
     for i in range(len(solution.boolIncluded)):
         if i == 1:
             count += 1
+    #Checks that at least one entry in Boolincluded is equal to 1
+    #otherwise it is not incrementing by or it is not the optimal solution
     assert (count >= 1), "BoolIncluded is not incrementing by ones"
