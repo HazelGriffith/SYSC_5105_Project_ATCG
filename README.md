@@ -11,11 +11,11 @@ After generating the test-cases for each technique we measure their statement co
 Then mutation testing is completed with the mutmut library where we demonstrate how to increase your test-suite's mutation score.
 
 ## Libraries Used
-pytest
-mutmut
-coverage
-pytest-cov
-signal (requires Linux based OS)
+- pytest
+- mutmut
+- coverage
+- pytest-cov
+- signal (requires Linux based OS)
 
 ## Categroy Partition Testing
 Access the "CategoryPartition" folder for the software that generates and runs tests with this technique
