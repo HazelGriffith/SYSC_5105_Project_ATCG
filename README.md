@@ -17,13 +17,13 @@ Then mutation testing is completed with the mutmut library where we demonstrate 
 - pytest-cov
 - signal (requires Linux based OS)
 
-## Categroy Partition Testing
+## Category Partition Testing
 Access the "CategoryPartition" folder for the software that generates and runs tests with this technique
 
 ## Combinatorial Testing for Quadratic Equation Solver
 Access the "QuadraticEquationSolver_Combinatorial" folder for the software that generates and runs tests with this technique
 
-## How to run Quadratic Equation Solver Metamorphic Testing
+## How to run Metamorphic Testing for Quadratic Equation Solver
 first, ensure your terminal has navigated to the Quadratic_Equation_Solver directory. 
 From the root directory enter: 
 "cd Metamorphic_and_SetCover_Combinatorial/Quadratic_Equation_Solver"
