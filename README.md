@@ -2,7 +2,7 @@
 Authors: Hazel Grifith and Ghinwa Yassin
 
 ## Description
-In this project demonstrate two techniques for automatically generating test cases for software. We use the techniques known as category partition/combinatorial pair-wise and metamorphic to automatically generate test cases for two case studies.
+In this project we demonstrate two techniques for automatically generating test cases for software. We use the techniques known as category partition/combinatorial pair-wise and metamorphic to automatically generate test cases for two case studies.
 Case study 1 is a program that uses a version of Newton's method to solve quadratic equations for their roots.
 Case study 2 is a program that uses a greedy algorithm followed by one of four back tracking algorithms to find a solution to minimal set cover problems
 
@@ -10,10 +10,23 @@ Case study 2 is a program that uses a greedy algorithm followed by one of four b
 After generating the test-cases for each technique we measure their statement coverage, branch coverage, and execution times. If any tests fail we determine what fault(s) was/were detected.
 Then mutation testing is completed with the mutmut library where we demonstrate how to increase your test-suite's mutation score.
 
-## How to run Quadratic Equation Solver case study
+## Libraries Used
+pytest
+mutmut
+coverage
+pytest-cov
+signal (requires Linux based OS)
+
+## Categroy Partition Testing
+Access the "CategoryPartition" folder for the software that generates and runs tests with this technique
+
+## Combinatorial Testing for Quadratic Equation Solver
+Access the "QuadraticEquationSolver_Combinatorial" folder for the software that generates and runs tests with this technique
+
+## How to run Quadratic Equation Solver Metamorphic Testing
 first, ensure your terminal has navigated to the Quadratic_Equation_Solver directory. 
 From the root directory enter: 
-"cd CaseStudies/Quadratic_Equation_Solver"
+"cd Metamorphic_and_SetCover_Combinatorial/Quadratic_Equation_Solver"
 
 ### Run Source Code
 To run the code enter: 
@@ -38,10 +51,10 @@ Once it is complete the results will be displayed in the terminal.
 To view the results in greater detail enter the command, "mutmut browse"
 For more details on how to use mutmut read this article, https://mutmut.readthedocs.io/en/latest/
 
-## How to run Set Problem Solver case study
+## How to run Set Problem Solver Metamorphic and Combinatorial Testing
 first, ensure your terminal has navigated to the Set_Problem_Solver directory. 
 From the root directory enter: 
-"cd CaseStudies/Set_Problem_Solver"
+"cd Metamorphic_and_SetCover_Combinatorial/Set_Problem_Solver"
 
 ### Run Source Code
 To run the code enter: 
@@ -60,13 +73,13 @@ To generate new combinatorial pair-wise test cases in the tests/test_cases/comb_
 "python -m tests.generate_CombPair_test_cases"
 
 To run the combinatorial pair-wise tests in the tests/test_cases/comb_pair_tests folder enter: 
-"pthon -m pytest --cov=source --cov-branch --cov-report=html --durations=0 tests/test_SC_CombPair.py"
+"pthon -m pytest tests/test_SC_CombPair.py --cov=source --cov-branch --cov-report=html --durations=0 "
 
 To generate new metamorphic test cases in the tests/test_cases/transformed_problem_files based upon the tests/test_cases/MR_tests_used folder enter: 
 "python -m tests.generate_MR_test_cases"
 
 To run the metamorphic tests with the seed tests stored in the tests/test_cases/MR_tests_used folder and the transformed tests stored in the tests/test_cases/transformed_problem_files folder enter:
-"python -m pytest --cov=source --cov-branch --cov-report=html --durations=0 tests/test_SC_MR.py"
+"python -m pytest tests/test_SC_MR.py --cov=source --cov-branch --cov-report=html --durations=0 "
 
 The test driver executions above will generate a folder called htmlcover that contains an html file called "index" that can be loaded to see your coverage report.
 Ensure the .coverage file has been deleted before running if you want to start over.
