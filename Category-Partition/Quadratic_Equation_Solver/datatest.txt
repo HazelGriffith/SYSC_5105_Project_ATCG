@@ -1,0 +1,102 @@
+[
+  {
+    "id": "TF1",
+    "input": [
+      1,
+      5,
+      6
+    ],
+    "output": "x1 = -3\nx2 = -2",
+    "status": "PASS"
+  },
+  {
+    "id": "TF2",
+    "input": [
+      1,
+      2,
+      1
+    ],
+    "output": "x1 = -1",
+    "status": "PASS"
+  },
+  {
+    "id": "TF3",
+    "input": [
+      1,
+      1,
+      2
+    ],
+    "output": "x1 = -0.5 + 1.3228756555322954j\nx2 = -0.5 - 1.3228756555322954j",
+    "status": "PASS"
+  },
+  {
+    "id": "TF4",
+    "input": [
+      0,
+      4,
+      8
+    ],
+    "error": "Not enough precision to process",
+    "status": "EXCEPTION"
+  },
+  {
+    "id": "TF5",
+    "input": [
+      1e-12,
+      3,
+      2
+    ],
+    "output": "x1 = -2999999999999.3335\nx2 = -0.6666666666668148",
+    "status": "PASS"
+  },
+  {
+    "id": "TF6",
+    "input": [
+      1e+308,
+      1e+308,
+      1
+    ],
+    "error": "Not enough precision to process",
+    "status": "EXCEPTION"
+  },
+  {
+    "id": "TF7",
+    "input": [
+      1,
+      -1000000.0,
+      1
+    ],
+    "output": "x1 = 999999.999999\nx2 = 1.000000000001e-06",
+    "status": "PASS"
+  },
+  {
+    "id": "TF8",
+    "input": [
+      1,
+      0,
+      -4
+    ],
+    "output": "x1 = 2\nx2 = -2",
+    "status": "PASS"
+  },
+  {
+    "id": "TF9",
+    "input": [
+      1,
+      0,
+      4
+    ],
+    "output": "x1 = 2j\nx2 = -2j",
+    "status": "PASS"
+  },
+  {
+    "id": "TF10",
+    "input": [
+      2,
+      4,
+      2
+    ],
+    "output": "x1 = -1",
+    "status": "PASS"
+  }
+]

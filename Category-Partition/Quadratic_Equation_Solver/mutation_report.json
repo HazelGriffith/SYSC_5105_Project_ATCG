@@ -1,0 +1,40 @@
+{
+    "total_mutants": 4,
+    "killed": 4,
+    "survived": 0,
+    "mutation_score": 100.0,
+    "mutants": [
+        {
+            "id": 1,
+            "name": "disc_lt_to_leq",
+            "description": "Change discriminant < 0 to <= 0 (affects complex vs real root boundary).",
+            "killed": true,
+            "old": "if (discriminant < 0):",
+            "new": "if (discriminant <= 0):"
+        },
+        {
+            "id": 2,
+            "name": "disc_lt_to_gt",
+            "description": "Change discriminant < 0 to > 0 (inverts complex/real branch).",
+            "killed": true,
+            "old": "if (discriminant < 0):",
+            "new": "if (discriminant > 0):"
+        },
+        {
+            "id": 3,
+            "name": "overflow_eq_to_neq",
+            "description": "Change discriminant == b*b to discriminant != b*b in overflow check.",
+            "killed": true,
+            "old": "if (math.isnan(discriminant) or discriminant == b*b):",
+            "new": "if (math.isnan(discriminant) or discriminant != b*b):"
+        },
+        {
+            "id": 4,
+            "name": "sign_gt_to_ge",
+            "description": "Change sign(b): >0 to >=0, so b==0 treated as positive.",
+            "killed": true,
+            "old": "return 1 if (b > 0) else -1",
+            "new": "return 1 if (b >= 0) else -1"
+        }
+    ]
+}

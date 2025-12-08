@@ -1,0 +1,27 @@
+====== MUTATION TEST SUMMARY ======
+Total mutants generated: 4
+Mutants killed:          4
+Mutants survived:        0
+Mutation Score:          100.00%
+
+====== MUTANT DETAILS ======
+
+[KILLED] disc_lt_to_leq
+  Description: Change discriminant < 0 to <= 0 (affects complex vs real root boundary).
+  Old: if (discriminant < 0):
+  New: if (discriminant <= 0):
+
+[KILLED] disc_lt_to_gt
+  Description: Change discriminant < 0 to > 0 (inverts complex/real branch).
+  Old: if (discriminant < 0):
+  New: if (discriminant > 0):
+
+[KILLED] overflow_eq_to_neq
+  Description: Change discriminant == b*b to discriminant != b*b in overflow check.
+  Old: if (math.isnan(discriminant) or discriminant == b*b):
+  New: if (math.isnan(discriminant) or discriminant != b*b):
+
+[KILLED] sign_gt_to_ge
+  Description: Change sign(b): >0 to >=0, so b==0 treated as positive.
+  Old: return 1 if (b > 0) else -1
+  New: return 1 if (b >= 0) else -1
