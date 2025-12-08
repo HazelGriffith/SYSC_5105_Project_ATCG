@@ -1,0 +1,4 @@
+# Frame: dense_overlap_large
+# High overlap chain structure.
+solution_size=3
+chosen_subsets=1,4,5

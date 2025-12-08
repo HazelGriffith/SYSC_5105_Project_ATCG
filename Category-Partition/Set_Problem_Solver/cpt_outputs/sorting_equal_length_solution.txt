@@ -1,0 +1,4 @@
+# Frame: sorting_equal_length
+# Tests equal-size branch in sortSubSets().
+solution_size=4
+chosen_subsets=4,1,2,3

@@ -1,0 +1,4 @@
+# Frame: single_subset_covers_all
+# One subset covers the entire universe.
+solution_size=1
+chosen_subsets=1

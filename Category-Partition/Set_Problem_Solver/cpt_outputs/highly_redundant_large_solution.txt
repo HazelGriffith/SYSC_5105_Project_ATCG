@@ -1,0 +1,4 @@
+# Frame: highly_redundant_large
+# One large superset plus many overlap subsets.
+solution_size=2
+chosen_subsets=5,4

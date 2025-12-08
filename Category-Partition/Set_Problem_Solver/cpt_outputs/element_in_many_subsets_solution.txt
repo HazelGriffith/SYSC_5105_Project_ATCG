@@ -1,0 +1,4 @@
+# Frame: element_in_many_subsets
+# Element 2 appears frequently.
+solution_size=3
+chosen_subsets=3,1,2

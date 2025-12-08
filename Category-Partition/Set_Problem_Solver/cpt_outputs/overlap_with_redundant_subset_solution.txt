@@ -1,0 +1,4 @@
+# Frame: overlap_with_redundant_subset
+# Redundant superset present; solver should still cover all elements.
+solution_size=1
+chosen_subsets=3

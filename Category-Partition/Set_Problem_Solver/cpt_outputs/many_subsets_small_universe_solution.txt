@@ -1,0 +1,4 @@
+# Frame: many_subsets_small_universe
+# More subsets than elements; many redundant subsets.
+solution_size=2
+chosen_subsets=1,3

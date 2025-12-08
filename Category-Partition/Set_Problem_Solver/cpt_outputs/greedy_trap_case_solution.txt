@@ -1,0 +1,4 @@
+# Frame: greedy_trap_case
+# Greedy initially picks large misleading subset — stresses backtracking recovery.
+solution_size=2
+chosen_subsets=6,1

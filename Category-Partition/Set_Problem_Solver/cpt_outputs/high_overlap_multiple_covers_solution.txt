@@ -1,0 +1,4 @@
+# Frame: high_overlap_multiple_covers
+# Multiple overlapping subsets; several alternative minimal covers.
+solution_size=3
+chosen_subsets=3,4,1

@@ -1,0 +1,4 @@
+# Frame: large_u_two_cover
+# 10 elements — only first two subsets form optimal cover.
+solution_size=3
+chosen_subsets=3,5,4

@@ -1,0 +1,4 @@
+# Frame: long_chain_cover
+# Worst case expansion — nearly linear backtracking depth required.
+solution_size=6
+chosen_subsets=1,3,5,7,9,11

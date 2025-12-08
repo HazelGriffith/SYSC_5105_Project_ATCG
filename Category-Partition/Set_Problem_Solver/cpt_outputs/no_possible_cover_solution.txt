@@ -1,0 +1,4 @@
+# Frame: no_possible_cover
+# Tests branch where universe cannot be fully covered.
+solution_size=0
+chosen_subsets=

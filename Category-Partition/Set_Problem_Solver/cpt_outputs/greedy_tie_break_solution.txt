@@ -1,0 +1,4 @@
+# Frame: greedy_tie_break
+# Greedy encounters subsets with equal coverage → tie-break branch.
+solution_size=2
+chosen_subsets=1,2

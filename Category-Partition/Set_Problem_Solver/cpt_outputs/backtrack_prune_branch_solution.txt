@@ -1,0 +1,4 @@
+# Frame: backtrack_prune_branch
+# Triggers prune branch in backtracking.
+solution_size=1
+chosen_subsets=1

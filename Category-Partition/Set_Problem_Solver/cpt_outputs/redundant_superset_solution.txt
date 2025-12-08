@@ -1,0 +1,4 @@
+# Frame: redundant_superset
+# Tests redundant superset logic.
+solution_size=1
+chosen_subsets=1
