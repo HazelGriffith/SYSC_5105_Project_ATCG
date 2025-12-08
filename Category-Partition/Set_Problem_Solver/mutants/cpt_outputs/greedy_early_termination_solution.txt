@@ -1,0 +1,4 @@
+# Frame: greedy_early_termination
+# Greedy should terminate early when full cover is achieved.
+solution_size=3
+chosen_subsets=3,1,2

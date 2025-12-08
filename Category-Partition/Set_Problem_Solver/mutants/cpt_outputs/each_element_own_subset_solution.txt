@@ -1,0 +1,4 @@
+# Frame: each_element_own_subset
+# Every element isolated; solution requires all subsets.
+solution_size=4
+chosen_subsets=1,2,3,4

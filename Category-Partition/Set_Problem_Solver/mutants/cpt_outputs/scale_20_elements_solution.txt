@@ -1,0 +1,4 @@
+# Frame: scale_20_elements
+# Larger problem for stress-testing.
+solution_size=2
+chosen_subsets=1,2

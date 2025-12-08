@@ -1,0 +1,4 @@
+# Frame: deep_backtracking_case
+# Forces deep recursion in backtracking.
+solution_size=4
+chosen_subsets=1,3,5,7

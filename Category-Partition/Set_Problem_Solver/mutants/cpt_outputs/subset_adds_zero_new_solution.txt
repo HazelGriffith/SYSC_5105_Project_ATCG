@@ -1,0 +1,4 @@
+# Frame: subset_adds_zero_new
+# Tests greedy ignore-branch and backtracking zero-benefit branch.
+solution_size=2
+chosen_subsets=1,4

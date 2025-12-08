@@ -1,0 +1,4 @@
+# Frame: backtrack_no_benefit
+# Forces backtracking to explore no-benefit branches.
+solution_size=2
+chosen_subsets=1,4
