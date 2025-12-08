@@ -73,7 +73,7 @@ save it as a new problem file, and repeat this "num" times for each metamorphic 
 args: filename = string, num = int
 '''
 def create_and_transform_problem(filename:str, num_of_tests_to_generate:int, num_of_redundant_subsets:int):
-    mainSet = setup_problem("tests_used/"+filename)
+    mainSet = setup_problem("MR_tests_used/"+filename)
 
     for i in range(num_of_tests_to_generate):
         new_relabeling_transformations(filename,mainSet.copy(),i)
@@ -144,7 +144,7 @@ def new_add_new_element_transformations(filename:str, mainSet):
     save(f"transformed_problem_files/{filename}_transformations/add_new_element", newSet)
 
 '''
-loads the tests in the tests_used folder, creates transformations according to the metamorphic relations, and saves the transformations
+loads the tests in the MR_tests_used folder, creates transformations according to the metamorphic relations, and saves the transformations
 '''
 def main():
     # Number of tests per metamorphic relation
@@ -153,12 +153,12 @@ def main():
     #Number of redundant subsets to add to test-cases for this metamorphic relation
     num_of_redundant_subsets = 1
 
-    #First, we take all problem files in the "tests_used" folder and prepare directories to contain
+    #First, we take all problem files in the "MR_tests_used" folder and prepare directories to contain
     #all of the transformed auto generated test problem files
     cwd = Path.cwd()
 
     testFilePath = cwd/"tests/test_cases/"
-    testEntries = os.listdir(testFilePath/"tests_used")
+    testEntries = os.listdir(testFilePath/"MR_tests_used")
 
     #Prepare new folders in the directory
     for pos, entry in enumerate(testEntries):

@@ -99,11 +99,11 @@ Covering test dictionaries for every metamorphic relation used
 '''
 cwd = Path.cwd()
 print(cwd)
-testEntries = os.listdir(cwd/"tests/test_cases/tests_used/")
+testEntries = os.listdir(cwd/"tests/test_cases/MR_tests_used/")
 
 for entry in testEntries:
     filename = entry.replace(".txt","")
-    mainSet = setup_problem(f"tests_used/{filename}")
+    mainSet = setup_problem(f"MR_tests_used/{filename}")
     #seed solutions given each back track version are found ahead of time to improve execution times
     seed_solution_1, seed_timedOut_1 = solve_problem(mainSet,1)
     seed_solution_2, seed_timedOut_2 = solve_problem(mainSet,2)
