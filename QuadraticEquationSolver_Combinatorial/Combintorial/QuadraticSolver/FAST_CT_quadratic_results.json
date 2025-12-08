@@ -1,0 +1,242 @@
+[
+    {
+        "id": "TC1",
+        "input": {
+            "a": 1e-06,
+            "b": 0,
+            "c": 0
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC2",
+        "input": {
+            "a": 0,
+            "b": -10,
+            "c": 0
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC3",
+        "input": {
+            "a": 1,
+            "b": 10,
+            "c": 0
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC4",
+        "input": {
+            "a": 1,
+            "b": -10,
+            "c": 0
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC5",
+        "input": {
+            "a": 10,
+            "b": 0,
+            "c": -10
+        },
+        "status": "PASS",
+        "output": "x1 = 1\nx2 = -1"
+    },
+    {
+        "id": "TC6",
+        "input": {
+            "a": 0,
+            "b": 0,
+            "c": 10
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC7",
+        "input": {
+            "a": 10,
+            "b": 10,
+            "c": 0
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC8",
+        "input": {
+            "a": 1e-06,
+            "b": 0,
+            "c": -10
+        },
+        "status": "PASS",
+        "output": "x1 = 3162.277660168379\nx2 = -3162.2776601683795"
+    },
+    {
+        "id": "TC9",
+        "input": {
+            "a": 1,
+            "b": 0,
+            "c": 10
+        },
+        "status": "PASS",
+        "output": "x1 = 3.162277660168379j\nx2 = -3.162277660168379j"
+    },
+    {
+        "id": "TC10",
+        "input": {
+            "a": 1,
+            "b": 10,
+            "c": -10
+        },
+        "status": "PASS",
+        "output": "x1 = -10.916079783099615\nx2 = 0.9160797830996161"
+    },
+    {
+        "id": "TC11",
+        "input": {
+            "a": 1,
+            "b": -10,
+            "c": -10
+        },
+        "status": "PASS",
+        "output": "x1 = 10.916079783099615\nx2 = -0.9160797830996161"
+    },
+    {
+        "id": "TC12",
+        "input": {
+            "a": 1e-06,
+            "b": 10,
+            "c": 0
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC13",
+        "input": {
+            "a": 10,
+            "b": -10,
+            "c": 0
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC14",
+        "input": {
+            "a": 10,
+            "b": 0,
+            "c": 10
+        },
+        "status": "PASS",
+        "output": "x1 = j\nx2 = -j"
+    },
+    {
+        "id": "TC15",
+        "input": {
+            "a": 0,
+            "b": 0,
+            "c": 0
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC16",
+        "input": {
+            "a": 1,
+            "b": 0,
+            "c": 0
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC17",
+        "input": {
+            "a": 1e-06,
+            "b": -10,
+            "c": 0
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC18",
+        "input": {
+            "a": 1e-06,
+            "b": 0,
+            "c": 10
+        },
+        "status": "PASS",
+        "output": "x1 = 3162.277660168379j\nx2 = -3162.277660168379j"
+    },
+    {
+        "id": "TC19",
+        "input": {
+            "a": 10,
+            "b": 0,
+            "c": 0
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC20",
+        "input": {
+            "a": 1,
+            "b": 10,
+            "c": 10
+        },
+        "status": "PASS",
+        "output": "x1 = -8.872983346207416\nx2 = -1.1270166537925832"
+    },
+    {
+        "id": "TC21",
+        "input": {
+            "a": 0,
+            "b": 0,
+            "c": -10
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC22",
+        "input": {
+            "a": 0,
+            "b": 10,
+            "c": 0
+        },
+        "status": "EXCEPTION",
+        "error": "Not enough precision to process"
+    },
+    {
+        "id": "TC23",
+        "input": {
+            "a": 1,
+            "b": -10,
+            "c": 10
+        },
+        "status": "PASS",
+        "output": "x1 = 8.872983346207416\nx2 = 1.1270166537925832"
+    },
+    {
+        "id": "TC24",
+        "input": {
+            "a": 1,
+            "b": 0,
+            "c": -10
+        },
+        "status": "PASS",
+        "output": "x1 = 3.162277660168379\nx2 = -3.1622776601683795"
+    }
+]
